@@ -1,39 +1,40 @@
 import { useEffect, useMemo, useCallback } from "react";
+
 import {
   useRecoilState,
   useRecoilValueLoadable,
   useSetRecoilState,
 } from "recoil";
 
-// components
 import {
   Container,
   FlexBox,
+  Header,
   PokemonsSection,
   SinglePokemon,
 } from "../../components";
 import PokemonSearch from "../../components/Molecules/PokemonSearch";
 
-// recoil: atoms
+
 import {
   atomPokemon,
   atomPokemonFetch,
   atomPokemonList,
 } from "../../store/atoms";
 
-// recoil: hashs
+
 import { atomHashPokemonsFetch, atomHashPokemonsList } from "../../store/hashs";
 
-// recoil: selectors
+
 import {
   selectorFetchPokemons,
   selectorGetPokemon,
   selectorGetPokemons,
 } from "../../store/selectors";
 
-// ::
+
 const HomePage = () => {
-  // recoil: states
+  
   const setFetchPokemons = useSetRecoilState(atomPokemonFetch);
   const [pokemon, setPokemon] = useRecoilState(atomPokemon);
   const [pokemonList, setPokemonList] = useRecoilState(atomPokemonList);
@@ -43,12 +44,12 @@ const HomePage = () => {
   const [hashPokemonsList, setHashPokemonsList] =
     useRecoilState(atomHashPokemonsList);
 
-  // recoil: loadable
+  
   const getLodablePokemons = useRecoilValueLoadable(selectorGetPokemons);
   const getLoadablePokemon = useRecoilValueLoadable(selectorGetPokemon);
   const fetchLoadablePokemon = useRecoilValueLoadable(selectorFetchPokemons);
 
-  // memo: states
+  
   const disabledFetchMorePokemons = useMemo(() => {
     if (
       fetchLoadablePokemon.state === "hasError" ||
@@ -125,13 +126,14 @@ const HomePage = () => {
 
   return (
     <Container>
+      <Header/>
       <FlexBox
         align="flex-start"
         justify="flex-start"
         direction="column"
         gap="xxxs"
       >
-      
+        
         <PokemonSearch />
         <SinglePokemon
           pokemon={pokemon}

@@ -1,13 +1,23 @@
 import styled ,{ keyframes}from 'styled-components';
-import { FlexBox } from '../../components'
 
-import charizardLogo from '../../assets/charizard.svg';
+import pokeLogo from '../../assets/poke.png';
 
 
 export const Container=styled.div`
+margin: 0 2.5%;
 height: 100vh;
 display: flex;
 align-items: stretch;
+
+@media(max-width: 400px){
+  transform: scale(0.85);
+  margin: 0 auto;
+}
+
+@media(max-width: 320px){
+  transform: scale(0.80);
+  margin: 0 -12%;
+}
 `
 
 export const Content =styled.div`
@@ -16,7 +26,7 @@ flex-direction: column;
 place-content: center;
 align-items: center;
 
-width: 40%;
+width: 50%;
 max-width: 900px;
 `
 
@@ -41,12 +51,12 @@ export const AnimationContainer = styled.div`
   animation: ${appearFromLeft} 1s;
 
   img {
-    width: 150px;
-    height: 150px;
+    width: 100px;
+    height: 100px;
   }
 
   form {
-    margin: 80px 0px;
+    margin: 20px 0px;
     width: 340px;
     text-align: center;
 
@@ -54,13 +64,6 @@ export const AnimationContainer = styled.div`
       margin-bottom: 24px;
     }
   }
-
-  > a {
-    color: #f8512d;
-    display: flex;
-    margin-top: 24px;
-    text-decoration: none;
-    transition: color 0.2s;
 
     svg {
       margin-right: 50px;
@@ -89,16 +92,20 @@ export const Divider = styled.div`
   background: #f4ede8;
   margin-top: 100px;
   margin-bottom: 150px;
-  margin-left: 10%;
+  margin-left: 5%;
+  @media(max-width: 845px){
+    display:none;
+  }
 `;
 
 export const ImageLogin = styled.div`
   flex: 1;
-  margin-bottom: 150px;
-  background: url(${charizardLogo}) no-repeat center;
+  background: url(${pokeLogo}) no-repeat center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-left:2%;
+  @media(max-width: 845px){
+    display:none;
+  }
 `;
-
-export const LoginForm=styled.div`
-margin: 0 50px;
-
-`

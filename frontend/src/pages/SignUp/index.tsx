@@ -1,15 +1,22 @@
 import {Input, Button} from "../../components";
 import PokeBallLogo from "../../assets/pokeball.svg";
 import * as Types from "./types";
-import { FiLogIn, FiMail, FiLock } from 'react-icons/fi';
 import {PokedexView} from "../../components/Atoms/PokedexView";
-import { Form } from '@unform/web';
+import { useState} from 'react';
  
 const emptyFunctionADD = function() {
   return undefined;
 }
 
 const SingUp = () => {
+
+  const [isShown, setIsSHown] = useState(false);
+
+  const togglePassword = () => {
+    setIsSHown((isShown) => !isShown);
+}
+
+
   return (
     <Types.Container>
         <Types.ImageLogin/>
@@ -21,7 +28,7 @@ const SingUp = () => {
                 <h1>POKEDEX</h1>
               </div>
             </Types.Header>
-            <PokedexView align="center" justify="center" direction="column" gap="xxs"  >
+            <PokedexView align="center" justify="center" direction="column" gap="xxs"> 
             <form >
               <h1>Register</h1>
 
@@ -29,11 +36,22 @@ const SingUp = () => {
             <Input name="email" placeholder="E-mail" />
             <Input
               name="password"
-              placeholder="password"
-              type="password"
+              placeholder="Password"
+              type={isShown ? 'text' : 'password'}
             />
-
+            <Input
+              name="password2"
+              placeholder="Password"
+              type={isShown ? 'text' : 'password'}
+            />
+            <label>
+              <input type="checkbox" checked={isShown} onChange={togglePassword}/>
+              <em>Show password?</em>
+            </label>
             <Button onClick={() => emptyFunctionADD}> Sign Up </Button>
+            <em>
+              <a href="/login" >Sign in</a>
+            </em>
             </form>
             </PokedexView>
           </Types.AnimationContainer>

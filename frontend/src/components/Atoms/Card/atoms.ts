@@ -39,17 +39,17 @@ export const PokemonSpot = styled(FlexBox)<TAtomPokemonType>`
 `;
 
 export const PokemonSprite = styled.img`
-  height: 200px;
-  width: 200px;
+  height: 175px;
+  width: 175px;
 `;
 
 export const PokemonPreviewSection = styled(FlexBox)`
-  height: 100px;
+  height: 180px;
 `;
 
 export const PokemonText = styled.span<TAtomPokemonType>`
   color: ${(props) => props?.theme?.colors?.types?.[props?.type]};
-  margin-left:30%;
+  padding-left: 26%;
   font-size: 1.25em;
   font-weight: bold;
   text-transform: capitalize;

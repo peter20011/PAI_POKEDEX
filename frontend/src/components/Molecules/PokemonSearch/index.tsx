@@ -1,22 +1,21 @@
 import { useState } from "react";
 import { useSetRecoilState } from "recoil";
 
-// icons
 import { MdSearch } from "react-icons/md";
 
-// recoil: atoms
+
 import { atomPokemonSearch } from "../../../store/atoms";
 
-// components
+
 import * as Atom from './atoms';
 import { Button, Input } from "../..";
 
-// ::
+
 const PokemonSearch = () => {
-  // local: states
+
   const [searchPokemon, setSearchPokemon] = useState<string>("");
 
-  // recoil: states
+
   const setPokemon = useSetRecoilState(atomPokemonSearch);
 
   return (

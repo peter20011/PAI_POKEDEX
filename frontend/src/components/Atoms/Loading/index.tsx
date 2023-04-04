@@ -1,15 +1,14 @@
 import { FC } from "react";
 
-// icons
 import pokeBall from "../../../assets/pokeball-rotate.png";
 
-// components
+
 import * as Atom from "./atoms";
 
-// types
+
 import type { ILoading } from "./types";
 
-// ::
+
 const Loading: FC<ILoading> = ({ isLoading, loadingText }) => {
   if (!isLoading) return null;
 
@@ -21,7 +20,7 @@ const Loading: FC<ILoading> = ({ isLoading, loadingText }) => {
       gap="xxs"
     >
       <Atom.PokemonIcon>
-        <img src={pokeBall} alt="Illustração de carregamento: pokebola girando" />
+        <img src={pokeBall} alt="" />
       </Atom.PokemonIcon>
       {loadingText}
     </Atom.LoadingContainer>

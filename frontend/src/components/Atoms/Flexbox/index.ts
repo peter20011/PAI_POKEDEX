@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-// types
 import type { IFlexBoxProps } from "./types";
 
 export const FlexBox = styled.div<IFlexBoxProps>`

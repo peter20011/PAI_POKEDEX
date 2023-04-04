@@ -1,4 +1,4 @@
-// components: atoms
+
 import { Container } from "./Atoms/Container";
 import { FlexBox } from "./Atoms/Flexbox";
 import { PokedexView } from "./Atoms/PokedexView";
@@ -10,7 +10,7 @@ import Input from "./Atoms/Input";
 import Loading from "./Atoms/Loading";
 
 
-// components: molecules
+
 import PokemonsSection from "./Molecules/PokemonsSection";
 import SinglePokemon from "./Molecules/SinglePokemon";
 

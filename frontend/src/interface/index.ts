@@ -295,3 +295,8 @@ export interface IPokemon {
   types: IPokemonTypes[];
   weight: number;
 }
+
+export interface ISignIn{
+  email: string;
+  password: string;
+}

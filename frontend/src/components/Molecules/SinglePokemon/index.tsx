@@ -1,19 +1,19 @@
 import { FC } from "react";
 import { useRecoilState } from "recoil";
 
-// icons
+
 import { MdAutorenew } from "react-icons/md";
 
-// components
+
 import { PokedexView, Card, FlexBox, Button, Loading } from "../../";
 import { atomHashPokemon } from "../../../store/hashs";
 
-// types
+
 import type { ISinglePokemon } from "./types";
 
-// ::
+
 const SinglePokemon: FC<ISinglePokemon> = ({ error, loading, pokemon }) => {
-  // recoil: states
+  
   const [hashPokemon, setHashPokemon] = useRecoilState(atomHashPokemon);
 
   const retryGetPokemon = () => setHashPokemon(hashPokemon + 1);

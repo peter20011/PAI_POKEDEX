@@ -5,10 +5,20 @@ import BacPoke from '../../assets/pokemons.jpg';
 
 
 export const Container=styled.div`
-margin: 0 15%;
+margin: 0 2.5%;
 height: 100vh;
 display: flex;
 align-items: stretch;
+
+@media(max-width: 870px){
+  margin: 0 48%;
+}
+
+@media(max-width: 390px){
+  margin: 0 48%;
+  transform: scale(0.85);
+}
+
 `
 
 export const Content =styled.div`
@@ -82,7 +92,13 @@ export const Header = styled.div`
 
 export const ImageLogin = styled.div`
   flex: 1;
-
   background: url(${BacPoke}) no-repeat center;
   background-size: center;
+  border-radius: 30%;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  @media(max-width: 870px){
+    display:none;
+  }
 `;

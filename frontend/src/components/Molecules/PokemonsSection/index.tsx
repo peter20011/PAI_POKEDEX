@@ -1,10 +1,10 @@
 import { FC } from "react";
 import { useRecoilState } from "recoil";
 
-// icons
+
 import { MdAutorenew, MdAdd } from "react-icons/md";
 
-// components
+
 import {
   PokedexView,
   Loading,
@@ -13,13 +13,12 @@ import {
   Button
 } from "../../";
 
-// recoil: atoms
 import { atomPokemonOffset } from "../../../store/atoms";
 
-// types
+
 import type { IPokemonsSection } from "./types";
 
-// ::
+
 const PokemonsSection: FC<IPokemonsSection> = ({
   loading,
   pokemons,
@@ -27,7 +26,7 @@ const PokemonsSection: FC<IPokemonsSection> = ({
   hasErrors,
   retryFetch,
 }) => {
-  // recoil: states
+  
   const [pokemonsOffset, setPokemonsOffset] = useRecoilState(atomPokemonOffset);
 
   return (

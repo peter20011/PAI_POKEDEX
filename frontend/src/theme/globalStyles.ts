@@ -2,6 +2,11 @@ import { createGlobalStyle } from "styled-components";
 
 export const ResetCss = createGlobalStyle`
   html,
+  * {
+  margin: 0px;
+  padding: 2px;
+  box-sizing: border-box;
+  }
   body {
     animation: fadeIn 0.7s both;
     color: ${({ theme }) => theme.font.colors.pure};

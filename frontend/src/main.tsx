@@ -7,7 +7,6 @@ import { ThemeProvider } from "styled-components";
 import AppRouter from "./routes";
 import { ResetCss } from "./theme/globalStyles";
 import { dark } from "./theme";
-import { Header } from "./components";
 import reportWebVitals from "./reportWebVitals";
 
 const root = ReactDOM.createRoot(
@@ -20,7 +19,6 @@ root.render(
       <ThemeProvider theme={dark()}>
         <ResetCss />
         <BrowserRouter>
-          <Header />
           <AppRouter />
         </BrowserRouter>
       </ThemeProvider>
