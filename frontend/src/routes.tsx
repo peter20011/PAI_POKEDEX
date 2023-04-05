@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { Error404, Home, Login,SignUP,Favorite,Owned} from "./pages";
+import { Error404, Home, Login,SignUP,Favorite,Owned,ChangePassword} from "./pages";
 
 
 const AppRouter = () => (
@@ -10,6 +10,7 @@ const AppRouter = () => (
     <Route path="/signUP" element={<SignUP />}/>
     <Route path="/app/favorite" element={<Favorite />} />
     <Route path="app/owned" element={<Owned/>}/>
+    <Route path="app/changepassword" element={<ChangePassword/>}/>
   </Routes>
 );
 

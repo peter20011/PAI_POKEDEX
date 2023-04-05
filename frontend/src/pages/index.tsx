@@ -4,5 +4,6 @@ import Login from "./Login";
 import SignUP from "./SignUp";
 import Favorite from "./Favorite";
 import Owned from "./Owned";
+import ChangePassword from "./ChangePassword";
 
-export { Home,Login,Error404,SignUP,Favorite,Owned};
+export { Home,Login,Error404,SignUP,Favorite,Owned, ChangePassword};
