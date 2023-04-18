@@ -6,7 +6,7 @@ import com.example.pokedex.Repository.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
+
 
 import java.time.LocalDate;
 import java.util.List;
@@ -72,6 +72,8 @@ public class Config {
             FavoritePokemon favoritePokemon_adam1= new FavoritePokemon(user1, Ivysaur);
             FavoritePokemon favoritePokemon_adam2= new FavoritePokemon(user1, Venusaur);
             FavoritePokemon favoritePokemon_adam3= new FavoritePokemon(user1, Bulbasaur);
+
+            favoritePokemonRepository.saveAll(List.of(favoritePokemon_marek1, favoritePokemon_marek2, favoritePokemon_marek3, favoritePokemon_adam1, favoritePokemon_adam2, favoritePokemon_adam3));
 
         };
     }
