@@ -18,7 +18,7 @@ services:
 
   db:
     image:
-      postgres:alpine
+      postgres:14.3
     restart:
       always
     environment:

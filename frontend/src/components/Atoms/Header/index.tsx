@@ -19,7 +19,7 @@ const Header = () => {
         align="center"
         justify="space-between"
         direction="row"
-        wrap="wrap"
+        wrap="nowrap"
       >
         <a href="/app/Home">
         <Atom.HeaderItem>

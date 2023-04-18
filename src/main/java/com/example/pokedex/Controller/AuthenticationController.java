@@ -1,5 +1,4 @@
-package com.example.backend.Controllers;
-
+package com.example.pokedex.Controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -8,11 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/auth")
 public class AuthenticationController {
-
-
-
     @PostMapping("login")
     public ResponseEntity<String> login(){
         String str="login";
@@ -30,6 +25,5 @@ public class AuthenticationController {
         String str="logout";
         return new ResponseEntity<>(str, HttpStatus.OK);
     }
-
 
 }

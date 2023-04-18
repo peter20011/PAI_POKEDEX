@@ -97,8 +97,10 @@ export const ImageLogin = styled.div`
   border-radius: 30%;
   background-repeat: no-repeat;
   background-position: center;
+  scale
+  transform: scale(0.85);
 
-  @media(max-width: 870px){
+  @media(max-width: 875px){
     display:none;
   }
 `;

@@ -49,7 +49,7 @@ export const PokemonPreviewSection = styled(FlexBox)`
 
 export const PokemonText = styled.span<TAtomPokemonType>`
   color: ${(props) => props?.theme?.colors?.types?.[props?.type]};
-  padding-left: 26%;
+  padding-left: 20%;
   font-size: 1.25em;
   font-weight: bold;
   text-transform: capitalize;
