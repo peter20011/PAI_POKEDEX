@@ -6,25 +6,29 @@ import com.example.pokedex.Repository.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 
 import java.time.LocalDate;
 import java.util.List;
 
 @Configuration
-public class Config {
+public class  Config {
 
     @Bean
     CommandLineRunner commandLineRunner(UserEntityRepository userEntityRepository,
                                         PokemonRepository pokemonRepository,
                                         OwnedPokemonRepository ownedPokemonRepository,
                                         FavoritePokemonRepository favoritePokemonRepository,
-                                        CommentRepository commentRepository) {
+                                        CommentRepository commentRepository, PasswordEncoder passwordEncoder) {
         return args -> {
 
             //save users
-            UserEntity user1 = new UserEntity("adam@wp.pl", "adam123", "adam", LocalDate.now());
-            UserEntity user2 = new UserEntity("marek@wp.pl", "marek123", "marek", LocalDate.now());
+            UserEntity user1 = new UserEntity("adam@wp.pl", passwordEncoder.encode("adam123"), "adam",
+                    LocalDate.now(),Role.USER);
+            UserEntity user2 = new UserEntity("marek@wp.pl", passwordEncoder.encode("marek123"), "marek",
+                    LocalDate.now(),
+                    Role.USER);
 
             userEntityRepository.saveAll(List.of(user1, user2));
 

@@ -3,18 +3,25 @@ package com.example.pokedex.Entity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 
 @Entity
-@Table(name = "user_entity")
-public class UserEntity {
+@Table(name = "users")
+public class UserEntity  implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id_user;
-    @Column(nullable = false)
+    @Column(nullable = false,
+    unique = true)
     private String email;
     @Column(nullable = false)
     private String password;
@@ -22,18 +29,21 @@ public class UserEntity {
     private String username;
     @Column(nullable = false)
     private LocalDate created_at;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
-    private List<OwnedPokemon> ownedPokemon;
+    private Set<OwnedPokemon> ownedPokemon;
 
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
-    private List<FavoritePokemon> favoritePokemon ;
+    private Set<FavoritePokemon> favoritePokemon ;
 
-    public UserEntity(String email, String password, String username, LocalDate created_at) {
+    public UserEntity(String email, String password, String username, LocalDate created_at, Role role) {
         this.email = email;
         this.password = password;
         this.username = username;
         this.created_at = created_at;
+        this.role=role;
     }
 
     public UserEntity() {
@@ -55,6 +65,19 @@ public class UserEntity {
         this.email = email;
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(role.name()));
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -63,8 +86,30 @@ public class UserEntity {
         this.password = password;
     }
 
-    public String getUsername() {
-        return username;
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
+
+    @Override
+    public String getUsername(){
+        return email;
     }
 
     public void setUsername(String username) {
@@ -79,19 +124,19 @@ public class UserEntity {
         this.created_at = created_at;
     }
 
-    public List<OwnedPokemon> getOwnedPokemon() {
+    public Set<OwnedPokemon> getOwnedPokemon() {
         return ownedPokemon;
     }
 
-    public void setOwnedPokemon(List<OwnedPokemon> ownedPokemon) {
+    public void setOwnedPokemon(Set<OwnedPokemon> ownedPokemon) {
         this.ownedPokemon = ownedPokemon;
     }
 
-    public List<FavoritePokemon> getFavoritePokemon() {
+    public Set<FavoritePokemon> getFavoritePokemon() {
         return favoritePokemon;
     }
 
-    public void setFavoritePokemon(List<FavoritePokemon> favoritePokemon) {
+    public void setFavoritePokemon(Set<FavoritePokemon> favoritePokemon) {
         this.favoritePokemon = favoritePokemon;
     }
 }

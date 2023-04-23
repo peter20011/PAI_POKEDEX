@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "pokemon")
@@ -15,11 +16,11 @@ public class Pokemon {
     @Column(nullable = false)
     private String name;
     @OneToMany(mappedBy = "pokemon", cascade = CascadeType.ALL)
-    private List<Comment> comments ;
+    private Set<Comment> comments ;
     @OneToMany(mappedBy = "pokemon", cascade = CascadeType.ALL)
-    private List<OwnedPokemon> ownedPokemons;
+    private Set<OwnedPokemon> ownedPokemons;
     @OneToMany(mappedBy = "pokemon", cascade = CascadeType.ALL)
-    private List<FavoritePokemon> favoritePokemons;
+    private Set<FavoritePokemon> favoritePokemons;
 
     public Pokemon(String name) {
         this.name = name;
@@ -44,27 +45,27 @@ public class Pokemon {
         this.name = name;
     }
 
-    public List<Comment> getComments() {
+    public Set<Comment> getComments() {
         return comments;
     }
 
-    public void setComments(List<Comment> comments) {
+    public void setComments(Set<Comment> comments) {
         this.comments = comments;
     }
 
-    public List<OwnedPokemon> getOwnedPokemons() {
+    public Set<OwnedPokemon> getOwnedPokemons() {
         return ownedPokemons;
     }
 
-    public void setOwnedPokemons(List<OwnedPokemon> ownedPokemons) {
+    public void setOwnedPokemons(Set<OwnedPokemon> ownedPokemons) {
         this.ownedPokemons = ownedPokemons;
     }
 
-    public List<FavoritePokemon> getFavoritePokemons() {
+    public Set<FavoritePokemon> getFavoritePokemons() {
         return favoritePokemons;
     }
 
-    public void setFavoritePokemons(List<FavoritePokemon> favoritePokemons) {
+    public void setFavoritePokemons(Set<FavoritePokemon> favoritePokemons) {
         this.favoritePokemons = favoritePokemons;
     }
 }
