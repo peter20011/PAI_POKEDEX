@@ -29,12 +29,17 @@ public class UserJPADataAccessService  implements UserDAO{
 
     @Override
     public boolean existsUserWithEmail(String email) {
-        return userEntityRepository.selectExistsEmail(email);
+        return userEntityRepository.findEmail(email);
     }
 
     @Override
     public void save(UserEntity userEntity) {
         userEntityRepository.save(userEntity);
+    }
+
+    @Override
+    public void changePassword(String email, String password) {
+        userEntityRepository.changePassword(email, password);
     }
 
 }

@@ -16,8 +16,9 @@ public interface UserEntityRepository extends JpaRepository<UserEntity, Long>{
     @Query(value = "SELECT * FROM users  WHERE email =:email", nativeQuery = true)
     UserEntity findByEmail(@Param("email") String email);
 
+    @Query(value = "SELECT EXISTS(SELECT * FROM users  WHERE email =:email)", nativeQuery = true)
+    boolean findEmail(@Param("email") String email);
     @Modifying
-    @Query(value="SELECT CASE WHEN count(u) >0 THEN TRUE ELSE FALSE END" +
-            "FROM users u WHERE u.email= :emails",nativeQuery = true)
-    Boolean selectExistsEmail(@Param("emails")String emails);
+    @Query(value = "UPDATE users SET password =:password WHERE email =:email", nativeQuery = true)
+    void changePassword(@Param("email") String email, @Param("password") String password);
 }

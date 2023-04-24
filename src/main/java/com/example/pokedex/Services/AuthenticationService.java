@@ -38,9 +38,7 @@ public class AuthenticationService {
 
     public ResponseEntity<?> login(AuthenticationRequest request){
         try{
-            logger.warn("Warning message" + request.email() + request.password());
             Authentication authentication;
-            logger.warn("Warning message");
 
             authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
@@ -48,16 +46,11 @@ public class AuthenticationService {
                             request.password()
                     )
             );
-            logger.warn("Warning message");
 
             UserEntity principal = (UserEntity) authentication.getPrincipal();
-            logger.warn("Warning message1"+ principal);
             UserDTO userDTO = userEntityDTOMapper.apply(principal);
-            logger.warn("Warning message2" );
             String token = jwtUtil.issueToken(userDTO.email(), userDTO.role().toString());
-            logger.warn("Warning message3");
             SecurityContextHolder.getContext().setAuthentication(authentication);
-            logger.warn("Warning message4");
 
             return new ResponseEntity<>(new AuthenticationResponse(token, "Login success"), HttpStatus.OK);
         }catch(AuthenticationException e){

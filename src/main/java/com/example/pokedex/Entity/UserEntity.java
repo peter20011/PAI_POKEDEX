@@ -8,10 +8,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 
 @Entity
@@ -32,11 +29,14 @@ public class UserEntity  implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private Set<OwnedPokemon> ownedPokemon;
 
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private Set<FavoritePokemon> favoritePokemon ;
+
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private Set<Comment> comments;
 
     public UserEntity(String email, String password, String username, LocalDate created_at, Role role) {
         this.email = email;
@@ -138,5 +138,18 @@ public class UserEntity  implements UserDetails {
 
     public void setFavoritePokemon(Set<FavoritePokemon> favoritePokemon) {
         this.favoritePokemon = favoritePokemon;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserEntity user = (UserEntity) o;
+        return id_user == user.id_user && Objects.equals(email, user.email) && Objects.equals(password, user.password) && Objects.equals(username, user.username) && Objects.equals(created_at, user.created_at) && role == user.role && Objects.equals(ownedPokemon, user.ownedPokemon) && Objects.equals(favoritePokemon, user.favoritePokemon);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id_user, email, password, username, created_at, role, ownedPokemon, favoritePokemon);
     }
 }

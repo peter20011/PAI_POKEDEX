@@ -3,6 +3,12 @@ package com.example.pokedex.Config;
 
 import com.example.pokedex.Entity.*;
 import com.example.pokedex.Repository.*;
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.Persistence;
+import org.json.JSONArray;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -34,6 +40,9 @@ public class  Config {
 
 
             //save pokemon
+
+
+
             Pokemon Bulbasaur= new Pokemon("Bulbasaur");
             Pokemon Ivysaur= new Pokemon("Ivysaur");
             Pokemon Venusaur= new Pokemon("Venusaur");
@@ -44,6 +53,8 @@ public class  Config {
             pokemonRepository.saveAll(List.of(Bulbasaur, Ivysaur, Venusaur, Charmander, Charmeleon, Charizard));
 
             //save comments
+
+
 
             Comment comment1 = new Comment("Bulbasaur is the best", LocalDate.now(), user1, Bulbasaur);
             Comment comment2 = new Comment("Ivysaur is the best", LocalDate.now(), user2, Ivysaur);

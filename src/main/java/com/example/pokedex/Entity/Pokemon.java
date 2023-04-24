@@ -68,4 +68,6 @@ public class Pokemon {
     public void setFavoritePokemons(Set<FavoritePokemon> favoritePokemons) {
         this.favoritePokemons = favoritePokemons;
     }
+
+
 }

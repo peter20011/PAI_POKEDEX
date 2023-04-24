@@ -8,9 +8,9 @@ public class OwnedPokemon {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id_owned_pokemon;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private UserEntity user;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Pokemon pokemon;
 
     public OwnedPokemon( UserEntity user, Pokemon pokemon) {

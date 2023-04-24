@@ -14,5 +14,6 @@ public interface UserDAO {
 
     void save(UserEntity userEntity);
 
+    void changePassword(String email, String password);
 
 }
