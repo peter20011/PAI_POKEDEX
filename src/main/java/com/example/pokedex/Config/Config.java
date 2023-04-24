@@ -34,7 +34,7 @@ public class  Config {
                     LocalDate.now(),Role.USER);
             UserEntity user2 = new UserEntity("marek@wp.pl", passwordEncoder.encode("marek123"), "marek",
                     LocalDate.now(),
-                    Role.USER);
+                    Role.ADMIN);
 
             userEntityRepository.saveAll(List.of(user1, user2));
 
@@ -80,13 +80,13 @@ public class  Config {
 
             //favorite pokemon
 
-            FavoritePokemon favoritePokemon_marek1= new FavoritePokemon(user2, Charizard);
-            FavoritePokemon favoritePokemon_marek2= new FavoritePokemon(user2, Charmeleon);
-            FavoritePokemon favoritePokemon_marek3= new FavoritePokemon(user2, Charmander);
+            FavoritePokemon favoritePokemon_marek1= new FavoritePokemon(user1, Charizard);
+            FavoritePokemon favoritePokemon_marek2= new FavoritePokemon(user1, Charmeleon);
+            FavoritePokemon favoritePokemon_marek3= new FavoritePokemon(user1, Charmander);
 
-            FavoritePokemon favoritePokemon_adam1= new FavoritePokemon(user1, Ivysaur);
-            FavoritePokemon favoritePokemon_adam2= new FavoritePokemon(user1, Venusaur);
-            FavoritePokemon favoritePokemon_adam3= new FavoritePokemon(user1, Bulbasaur);
+            FavoritePokemon favoritePokemon_adam1= new FavoritePokemon(user2, Ivysaur);
+            FavoritePokemon favoritePokemon_adam2= new FavoritePokemon(user2, Venusaur);
+            FavoritePokemon favoritePokemon_adam3= new FavoritePokemon(user2, Bulbasaur);
 
             favoritePokemonRepository.saveAll(List.of(favoritePokemon_marek1, favoritePokemon_marek2, favoritePokemon_marek3, favoritePokemon_adam1, favoritePokemon_adam2, favoritePokemon_adam3));
 

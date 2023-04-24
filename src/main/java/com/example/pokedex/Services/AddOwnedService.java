@@ -12,7 +12,11 @@ import com.example.pokedex.Util.JWTUtil;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class AddOwnedService {
@@ -65,5 +69,20 @@ public class AddOwnedService {
         }catch (Exception e){
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    public ResponseEntity<?>getFromOwned(Authentication authentication){
+       try {
+           UserEntity owner = userDAO.findUserByEmail(authentication.getName());
+           List<Object> ownedList=ownedDAO.owning(owner.getId_user());
+
+           if(ownedList.isEmpty()){
+               return new ResponseEntity<>(ownedList, HttpStatus.NOT_FOUND);
+           }
+           return new ResponseEntity<>(ownedList, HttpStatus.OK);
+       }catch (Exception e){
+           ArrayList<Pokemon> empty = new ArrayList<>();
+           return new ResponseEntity<>(empty, HttpStatus.INTERNAL_SERVER_ERROR);
+       }
     }
 }

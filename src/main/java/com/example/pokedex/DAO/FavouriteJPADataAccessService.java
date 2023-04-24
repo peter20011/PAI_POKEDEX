@@ -1,8 +1,11 @@
 package com.example.pokedex.DAO;
 
 import com.example.pokedex.Entity.FavoritePokemon;
+import com.example.pokedex.Entity.Pokemon;
 import com.example.pokedex.Repository.FavoritePokemonRepository;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository("favourite")
 public class FavouriteJPADataAccessService implements FavouriteDAO{
@@ -21,5 +24,10 @@ public class FavouriteJPADataAccessService implements FavouriteDAO{
     @Override
     public boolean ifExists(long pokemonId, long userId) {
         return favoritePokemonRepository.existsByPokemonIdAndUserId(pokemonId, userId);
+    }
+
+    @Override
+    public List<Object> favorite(long userId) {
+        return favoritePokemonRepository.findByFavorite(userId);
     }
 }

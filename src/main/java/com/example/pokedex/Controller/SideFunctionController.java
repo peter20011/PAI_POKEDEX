@@ -1,15 +1,19 @@
 package com.example.pokedex.Controller;
 
 
-import com.example.pokedex.DTO.ChangePasswordRequest;
-import com.example.pokedex.DTO.FavouriteRequest;
-import com.example.pokedex.DTO.OwnedRequest;
+import com.example.pokedex.DTO.*;
+import com.example.pokedex.Entity.Pokemon;
 import com.example.pokedex.Services.AddFavouriteService;
 import com.example.pokedex.Services.AddOwnedService;
 import com.example.pokedex.Services.ChangePasswordService;
+import com.example.pokedex.Services.CommentService;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/app")
@@ -18,13 +22,17 @@ public class SideFunctionController {
     private ChangePasswordService changePasswordService;
     private AddFavouriteService addFavouriteService;
 
+    private CommentService commentService;
     private AddOwnedService addOwnedService;
 
+
     public SideFunctionController(ChangePasswordService changePasswordService,
-                                  AddFavouriteService addFavouriteService,AddOwnedService addOwnedService) {
+                                  AddFavouriteService addFavouriteService,AddOwnedService addOwnedService,
+                                  CommentService commentService) {
         this.changePasswordService = changePasswordService;
         this.addFavouriteService = addFavouriteService;
         this.addOwnedService = addOwnedService;
+        this.commentService = commentService;
     }
 
     @PostMapping("/addToFavourite")
@@ -32,10 +40,9 @@ public class SideFunctionController {
         return addFavouriteService.addToFavourite(request);
     }
 
-    @GetMapping("/getFromFavorites")
-    public ResponseEntity<String> getFromFavorites(){
-        String str="getFromFavorites";
-        return new ResponseEntity<>(str,HttpStatus.OK);
+    @GetMapping(value = "/getFromFavorites",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getFromFavorites(Authentication authentication){
+        return addFavouriteService.getFromFavorites(authentication);
     }
 
     @PostMapping("/addToOwned")
@@ -43,20 +50,24 @@ public class SideFunctionController {
         return addOwnedService.addToOwned(request);
     }
 
-    @GetMapping("/getFromOwned")
-    public ResponseEntity<String> getFromOwned(){
-        String str="getFromFavorites";
-        return new ResponseEntity<>(str,HttpStatus.OK);
+    @GetMapping(value = "/getFromOwned",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getFromOwned( Authentication authentication){
+        return addOwnedService.getFromOwned(authentication);
     }
 
-    @PostMapping("/addComment")
-    public ResponseEntity<String> addComment(@RequestBody String str){
-        return new ResponseEntity<>(str, HttpStatus.OK);
+    @PostMapping("/addComment/{pokemonName}")
+    public ResponseEntity<?> addComment(@RequestBody CommentRequest request, @PathVariable String pokemonName){
+        return commentService.addComment(request,pokemonName);
     }
 
-    @GetMapping("/getComments")
-    public ResponseEntity<String> getComments(@RequestBody String str){
-        return new ResponseEntity<>(str,HttpStatus.OK);
+    @GetMapping(value = "/getComments/{pokemonName}")
+    public ResponseEntity<?> getComments(@PathVariable String pokemonName){
+       return commentService.getComments(pokemonName);
+    }
+
+    @PostMapping("/deleteComment")
+    public ResponseEntity<?> deleteComment(@RequestBody AdminRequesst request){
+        return commentService.deleteComment(request);
     }
 
     @PostMapping("/changePassword")

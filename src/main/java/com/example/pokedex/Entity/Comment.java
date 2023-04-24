@@ -21,7 +21,7 @@ public class Comment {
     private LocalDate  created_at;
     @ManyToOne(fetch = FetchType.LAZY)
     private UserEntity user;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Pokemon pokemon;
 
     public Comment(String content, LocalDate created_at, UserEntity user, Pokemon pokemon) {
