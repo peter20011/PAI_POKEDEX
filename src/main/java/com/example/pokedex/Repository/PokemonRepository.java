@@ -10,4 +10,7 @@ import org.springframework.stereotype.Repository;
 public interface PokemonRepository extends JpaRepository<Pokemon, Long>{
     @Query(value = "SELECT * FROM pokemon WHERE name = :name", nativeQuery = true)
     Pokemon findByName(@Param("name")String name);
+
+    @Query(value ="SELECT EXISTS(SELECT * FROM pokemon WHERE name = :name)",nativeQuery = true)
+    boolean existsByName(@Param("name")String name);
 }

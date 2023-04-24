@@ -6,6 +6,8 @@ import com.example.pokedex.Entity.UserEntity;
 import com.example.pokedex.Util.JWTUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCrypt;
@@ -22,7 +24,7 @@ public class ChangePasswordService {
 
     Logger logger = LoggerFactory.getLogger(ChangePasswordService.class);
 
-    public ChangePasswordService(UserDAO userDAO, JWTUtil jwtUtil,PasswordEncoder passwordEncoder) {
+    public ChangePasswordService(@Qualifier("jpa") UserDAO userDAO, JWTUtil jwtUtil, PasswordEncoder passwordEncoder) {
         this.userDAO = userDAO;
         this.jwtUtil = jwtUtil;
         this.passwordEncoder = passwordEncoder;

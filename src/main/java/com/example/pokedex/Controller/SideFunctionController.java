@@ -2,6 +2,10 @@ package com.example.pokedex.Controller;
 
 
 import com.example.pokedex.DTO.ChangePasswordRequest;
+import com.example.pokedex.DTO.FavouriteRequest;
+import com.example.pokedex.DTO.OwnedRequest;
+import com.example.pokedex.Services.AddFavouriteService;
+import com.example.pokedex.Services.AddOwnedService;
 import com.example.pokedex.Services.ChangePasswordService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,14 +16,20 @@ import org.springframework.web.bind.annotation.*;
 public class SideFunctionController {
 
     private ChangePasswordService changePasswordService;
+    private AddFavouriteService addFavouriteService;
 
-    public SideFunctionController(ChangePasswordService changePasswordService) {
+    private AddOwnedService addOwnedService;
+
+    public SideFunctionController(ChangePasswordService changePasswordService,
+                                  AddFavouriteService addFavouriteService,AddOwnedService addOwnedService) {
         this.changePasswordService = changePasswordService;
+        this.addFavouriteService = addFavouriteService;
+        this.addOwnedService = addOwnedService;
     }
 
     @PostMapping("/addToFavourite")
-    public ResponseEntity<String> addToFavourite(@RequestBody String str){
-        return new ResponseEntity<>(str, HttpStatus.OK);
+    public ResponseEntity<?> addToFavourite(@RequestBody FavouriteRequest request){
+        return addFavouriteService.addToFavourite(request);
     }
 
     @GetMapping("/getFromFavorites")
@@ -29,8 +39,8 @@ public class SideFunctionController {
     }
 
     @PostMapping("/addToOwned")
-    public ResponseEntity<String> addToOwned(@RequestBody String str){
-        return new ResponseEntity<>(str, HttpStatus.OK);
+    public ResponseEntity<?> addToOwned(@RequestBody OwnedRequest request){
+        return addOwnedService.addToOwned(request);
     }
 
     @GetMapping("/getFromOwned")
@@ -45,8 +55,7 @@ public class SideFunctionController {
     }
 
     @GetMapping("/getComments")
-    public ResponseEntity<String> getComments(){
-        String str="getFromFavorites";
+    public ResponseEntity<String> getComments(@RequestBody String str){
         return new ResponseEntity<>(str,HttpStatus.OK);
     }
 
