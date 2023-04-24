@@ -21,7 +21,6 @@ public class SideFunctionController {
 
     private ChangePasswordService changePasswordService;
     private AddFavouriteService addFavouriteService;
-
     private CommentService commentService;
     private AddOwnedService addOwnedService;
 
@@ -60,7 +59,7 @@ public class SideFunctionController {
         return commentService.addComment(request,pokemonName);
     }
 
-    @GetMapping(value = "/getComments/{pokemonName}")
+    @GetMapping("/getComments/{pokemonName}")
     public ResponseEntity<?> getComments(@PathVariable String pokemonName){
        return commentService.getComments(pokemonName);
     }

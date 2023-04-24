@@ -22,7 +22,7 @@ public class CommentJPADataAccess implements CommentDAO{
     }
 
     @Override
-    public List<Comment> getComments(long pokemonId) {
+    public List<Object> getComments(long pokemonId) {
         return commentRepository.findAllCommentsByPokemonId(pokemonId);
     }
 

@@ -3,6 +3,7 @@ package com.example.pokedex.Entity;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Entity
 @Table(name = "comment")
@@ -21,7 +22,7 @@ public class Comment {
     private LocalDate  created_at;
     @ManyToOne(fetch = FetchType.LAZY)
     private UserEntity user;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Pokemon pokemon;
 
     public Comment(String content, LocalDate created_at, UserEntity user, Pokemon pokemon) {
@@ -73,4 +74,5 @@ public class Comment {
     public void setPokemon(Pokemon pokemon) {
         this.pokemon = pokemon;
     }
+
 }

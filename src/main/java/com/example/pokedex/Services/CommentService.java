@@ -66,7 +66,7 @@ public class CommentService {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    //TODO repait this
+    //TODO repair this
     public ResponseEntity<?> getComments(String pokemonName){
         try {
             logger.info("Getting comments for pokemon: " + pokemonName);
@@ -75,8 +75,9 @@ public class CommentService {
                 return new ResponseEntity<>("Pokemon not found", HttpStatus.NOT_FOUND);
             }
             logger.info("Pokemon found: " + pokemon.getName()+" id: " + pokemon.getId_pokemon());
-            List<Comment> comments=commentDAO.getComments(pokemon.getId_pokemon());
+            List<Object> comments=commentDAO.getComments(pokemon.getId_pokemon());
             logger.info("dupa3");
+            logger.info("Comments found: " + comments.toString());
             return new ResponseEntity<>(comments, HttpStatus.OK);
         }catch (Exception e){
             logger.info(e.getMessage());
@@ -88,8 +89,7 @@ public class CommentService {
         try {
             String email = jwtUtil.getSubject(request.token());
             UserEntity admin= userDAO.findUserByEmail(email);
-            logger.info("Admin found: " + admin.getEmail());
-            logger.info("Admin role: " + admin.getRole());
+
             if(admin == null){
                 return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
             }

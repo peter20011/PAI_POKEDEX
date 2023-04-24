@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface CommentRepository extends JpaRepository<Comment, Long>{
     @Query(value = "SELECT * FROM comment WHERE pokemon_id_pokemon =:idPokemon ORDER BY created_at DESC", nativeQuery = true)
-    List<Comment> findAllCommentsByPokemonId(@Param("idPokemon") long idPok);
+    List<Object> findAllCommentsByPokemonId(@Param("idPokemon") long idPok);
 
     @Query(value = "SELECT EXISTS(SELECT * FROM comment WHERE comment_id =:idComment)", nativeQuery = true)
     boolean ifExist(@Param("idComment") long idComment);

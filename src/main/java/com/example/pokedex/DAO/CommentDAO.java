@@ -8,7 +8,7 @@ public interface CommentDAO {
 
     void addComment(Comment comment);
 
-    List<Comment> getComments(long pokemonId);
+    List<Object> getComments(long pokemonId);
 
     void deleteComment(Comment comment);
 
