@@ -24,7 +24,7 @@ public class AuthenticationController {
         this.registrationService = registrationService;
     }
 
-    @PostMapping("/login")
+    @PostMapping(value = "/login",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> login(@RequestBody AuthenticationRequest request){
         return authenticationService.login(request);
     }

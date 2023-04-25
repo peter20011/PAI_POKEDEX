@@ -34,7 +34,7 @@ public class SideFunctionController {
         this.commentService = commentService;
     }
 
-    @PostMapping("/addToFavourite")
+    @PostMapping(value = "/addToFavourite",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> addToFavourite(@RequestBody FavouriteRequest request){
         return addFavouriteService.addToFavourite(request);
     }
@@ -44,7 +44,7 @@ public class SideFunctionController {
         return addFavouriteService.getFromFavorites(authentication);
     }
 
-    @PostMapping("/addToOwned")
+    @PostMapping(value = "/addToOwned",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> addToOwned(@RequestBody OwnedRequest request){
         return addOwnedService.addToOwned(request);
     }
@@ -54,22 +54,22 @@ public class SideFunctionController {
         return addOwnedService.getFromOwned(authentication);
     }
 
-    @PostMapping("/addComment/{pokemonName}")
+    @PostMapping(value = "/addComment/{pokemonName}",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> addComment(@RequestBody CommentRequest request, @PathVariable String pokemonName){
         return commentService.addComment(request,pokemonName);
     }
 
-    @GetMapping("/getComments/{pokemonName}")
+    @GetMapping(value="/getComments/{pokemonName}",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getComments(@PathVariable String pokemonName){
        return commentService.getComments(pokemonName);
     }
 
-    @PostMapping("/deleteComment")
+    @PostMapping(value = "/deleteComment",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> deleteComment(@RequestBody AdminRequesst request){
         return commentService.deleteComment(request);
     }
 
-    @PostMapping("/changePassword")
+    @PostMapping(value = "/changePassword",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> changePassword(@RequestBody ChangePasswordRequest request){
         return changePasswordService.changePassword(request);
     }
