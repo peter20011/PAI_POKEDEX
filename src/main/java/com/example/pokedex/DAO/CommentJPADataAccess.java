@@ -1,6 +1,7 @@
 package com.example.pokedex.DAO;
 
 import com.example.pokedex.Entity.Comment;
+import com.example.pokedex.Entity.CommentDisplay;
 import com.example.pokedex.Repository.CommentRepository;
 import org.springframework.stereotype.Repository;
 
@@ -22,7 +23,7 @@ public class CommentJPADataAccess implements CommentDAO{
     }
 
     @Override
-    public List<Object> getComments(long pokemonId) {
+    public List<CommentDisplay> getComments(long pokemonId) {
         return commentRepository.findAllCommentsByPokemonId(pokemonId);
     }
 

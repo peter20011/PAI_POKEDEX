@@ -3,7 +3,6 @@ package com.example.pokedex.DAO;
 
 import com.example.pokedex.Entity.UserEntity;
 import com.example.pokedex.Repository.UserEntityRepository;
-import org.apache.catalina.User;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

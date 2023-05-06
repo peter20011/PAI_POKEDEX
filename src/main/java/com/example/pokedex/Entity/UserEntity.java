@@ -18,7 +18,7 @@ public class UserEntity  implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id_user;
     @Column(nullable = false,
-    unique = true)
+            unique = true)
     private String email;
     @Column(nullable = false)
     private String password;
@@ -29,13 +29,13 @@ public class UserEntity  implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<OwnedPokemon> ownedPokemon;
 
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    private Set<FavoritePokemon> favoritePokemon ;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<FavoritePokemon> favoritePokemon;
 
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Comment> comments;
 
     public UserEntity(String email, String password, String username, LocalDate created_at, Role role) {
@@ -43,7 +43,7 @@ public class UserEntity  implements UserDetails {
         this.password = password;
         this.username = username;
         this.created_at = created_at;
-        this.role=role;
+        this.role = role;
     }
 
     public UserEntity() {
@@ -108,7 +108,7 @@ public class UserEntity  implements UserDetails {
 
 
     @Override
-    public String getUsername(){
+    public String getUsername() {
         return email;
     }
 

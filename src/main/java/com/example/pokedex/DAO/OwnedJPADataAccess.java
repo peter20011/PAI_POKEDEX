@@ -1,7 +1,6 @@
 package com.example.pokedex.DAO;
 
 import com.example.pokedex.Entity.OwnedPokemon;
-import com.example.pokedex.Entity.Pokemon;
 import com.example.pokedex.Repository.OwnedPokemonRepository;
 import org.springframework.stereotype.Repository;
 

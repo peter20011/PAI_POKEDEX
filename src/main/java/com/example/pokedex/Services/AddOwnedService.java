@@ -4,7 +4,6 @@ import com.example.pokedex.DAO.OwnedDAO;
 import com.example.pokedex.DAO.PokemonDAO;
 import com.example.pokedex.DAO.UserDAO;
 import com.example.pokedex.DTO.OwnedRequest;
-import com.example.pokedex.Entity.FavoritePokemon;
 import com.example.pokedex.Entity.OwnedPokemon;
 import com.example.pokedex.Entity.Pokemon;
 import com.example.pokedex.Entity.UserEntity;

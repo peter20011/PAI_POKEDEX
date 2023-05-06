@@ -2,6 +2,7 @@ package com.example.pokedex.Controller;
 
 
 import com.example.pokedex.DTO.*;
+import com.example.pokedex.Entity.Comment;
 import com.example.pokedex.Entity.Pokemon;
 import com.example.pokedex.Services.AddFavouriteService;
 import com.example.pokedex.Services.AddOwnedService;
@@ -59,7 +60,7 @@ public class SideFunctionController {
         return commentService.addComment(request,pokemonName);
     }
 
-    @GetMapping(value="/getComments/{pokemonName}",produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping("/getComments/{pokemonName}")
     public ResponseEntity<?> getComments(@PathVariable String pokemonName){
        return commentService.getComments(pokemonName);
     }

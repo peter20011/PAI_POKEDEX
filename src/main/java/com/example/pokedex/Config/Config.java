@@ -30,13 +30,13 @@ public class  Config {
         return args -> {
 
             //save users
-            UserEntity user1 = new UserEntity("adam@wp.pl", passwordEncoder.encode("adam123"), "adam",
+            UserEntity user1 = new UserEntity("example123@test.com", passwordEncoder.encode("makare5"), "adam",
                     LocalDate.now(),Role.USER);
-            UserEntity user2 = new UserEntity("marek@wp.pl", passwordEncoder.encode("marek123"), "marek",
+            UserEntity user2 = new UserEntity("jane_doe_456@example.net", passwordEncoder.encode("makare6"), "marek",
                     LocalDate.now(),
                     Role.ADMIN);
 
-            userEntityRepository.saveAll(List.of(user1, user2));
+
 
 
             //save pokemon
@@ -50,7 +50,7 @@ public class  Config {
             Pokemon Charmeleon= new Pokemon("Charmeleon");
             Pokemon Charizard= new Pokemon("Charizard");
 
-            pokemonRepository.saveAll(List.of(Bulbasaur, Ivysaur, Venusaur, Charmander, Charmeleon, Charizard));
+
 
             //save comments
 
@@ -62,6 +62,9 @@ public class  Config {
             Comment comment4 = new Comment("Charmander is the best", LocalDate.now(), user2, Charmander);
             Comment comment5 = new Comment("Charmeleon is the best", LocalDate.now(), user1, Charmeleon);
             Comment comment6 = new Comment("Charizard is the best", LocalDate.now(), user2, Charizard);
+
+            userEntityRepository.saveAll(List.of(user1, user2));
+            pokemonRepository.saveAll(List.of(Bulbasaur, Ivysaur, Venusaur, Charmander, Charmeleon, Charizard));
             commentRepository.saveAll(List.of(comment1, comment2, comment3, comment4, comment5, comment6));
 
 

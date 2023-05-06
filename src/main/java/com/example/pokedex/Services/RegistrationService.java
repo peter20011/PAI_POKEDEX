@@ -13,7 +13,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.UUID;
 
 @Service
 public class RegistrationService {
@@ -21,11 +20,15 @@ public class RegistrationService {
     private final UserDAO userDAO;
     private final PasswordEncoder passwordEncoder;
 
+    private final PasswordValidatorService passwordValidatorService;
 
-    public RegistrationService(EmailValidatorService emailValidatorService, UserDAO userDAO, PasswordEncoder passwordEncoder) {
+
+    public RegistrationService(EmailValidatorService emailValidatorService, UserDAO userDAO,
+                               PasswordEncoder passwordEncoder, PasswordValidatorService passwordValidatorService) {
         this.emailValidatorService = emailValidatorService;
         this.userDAO = userDAO;
         this.passwordEncoder = passwordEncoder;
+        this.passwordValidatorService = passwordValidatorService;
     }
 
     public ResponseEntity<Object> register(UserRegistrationRequest request){
@@ -36,6 +39,10 @@ public class RegistrationService {
 
         if(userDAO.existsUserWithEmail(request.email())){
             return  new ResponseEntity<>( new AuthenticationFailedResponse("Email is taken!"), HttpStatus.BAD_REQUEST);
+        }
+
+        if(!passwordValidatorService.test(request.password())){
+            return  new ResponseEntity<>( new AuthenticationFailedResponse("Password is not valid!"), HttpStatus.BAD_REQUEST);
         }
 
         UserEntity userEntity = new UserEntity(

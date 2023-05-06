@@ -1,24 +1,21 @@
 package com.example.pokedex.Services;
 
+import com.example.pokedex.Entity.*;
 import com.example.pokedex.DAO.CommentDAO;
 import com.example.pokedex.DAO.PokemonDAO;
 import com.example.pokedex.DAO.UserDAO;
 import com.example.pokedex.DTO.AdminRequesst;
 import com.example.pokedex.DTO.CommentRequest;
-import com.example.pokedex.Entity.Comment;
-import com.example.pokedex.Entity.Pokemon;
-import com.example.pokedex.Entity.Role;
-import com.example.pokedex.Entity.UserEntity;
 import com.example.pokedex.Util.JWTUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 @Service
 public class CommentService {
@@ -66,22 +63,22 @@ public class CommentService {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    //TODO repair this
-    public ResponseEntity<?> getComments(String pokemonName){
+
+
+    public ResponseEntity<List<CommentDisplay>> getComments(String pokemonName) {
         try {
-            logger.info("Getting comments for pokemon: " + pokemonName);
             Pokemon pokemon = pokemonDAO.findPokemonByName(pokemonName);
             if(pokemon == null){
-                return new ResponseEntity<>("Pokemon not found", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>(new ArrayList<>(), HttpStatus.NOT_FOUND);
             }
-            logger.info("Pokemon found: " + pokemon.getName()+" id: " + pokemon.getId_pokemon());
-            List<Object> comments=commentDAO.getComments(pokemon.getId_pokemon());
-            logger.info("dupa3");
-            logger.info("Comments found: " + comments.toString());
+
+            List<CommentDisplay> comments = commentDAO.getComments(pokemon.getId_pokemon());
+
+
             return new ResponseEntity<>(comments, HttpStatus.OK);
-        }catch (Exception e){
-            logger.info(e.getMessage());
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 

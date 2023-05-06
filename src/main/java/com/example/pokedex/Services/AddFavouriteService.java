@@ -77,7 +77,6 @@ public class AddFavouriteService {
             logger.info("User: " + owner.getEmail() + " is getting his favourites");
             logger.info("User id: " + owner.getId_user());
             List<Object> ownedList=favouriteDAO.favorite(owner.getId_user());
-            logger.warn("dupa");
             if(ownedList.isEmpty()){
                 return new ResponseEntity<>(ownedList, HttpStatus.NOT_FOUND);
             }

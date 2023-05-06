@@ -1,5 +1,6 @@
 package com.example.pokedex.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -22,6 +23,7 @@ public class Comment {
     private LocalDate  created_at;
     @ManyToOne(fetch = FetchType.LAZY)
     private UserEntity user;
+
     @ManyToOne(fetch = FetchType.LAZY)
     private Pokemon pokemon;
 
@@ -74,5 +76,7 @@ public class Comment {
     public void setPokemon(Pokemon pokemon) {
         this.pokemon = pokemon;
     }
+
+
 
 }
