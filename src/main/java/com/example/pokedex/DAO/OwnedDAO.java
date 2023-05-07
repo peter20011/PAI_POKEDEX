@@ -2,6 +2,7 @@ package com.example.pokedex.DAO;
 
 import com.example.pokedex.Entity.OwnedPokemon;
 import com.example.pokedex.Entity.Pokemon;
+import com.example.pokedex.Entity.PokemonReturned;
 
 import java.util.List;
 
@@ -11,5 +12,5 @@ public interface OwnedDAO {
 
     boolean ifExists(long pokemonId, long userId);
 
-    List<Object> owning(long userId);
+    List<PokemonReturned> owning(long userId);
 }

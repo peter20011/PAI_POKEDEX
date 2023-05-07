@@ -6,6 +6,7 @@ import com.example.pokedex.DAO.UserDAO;
 import com.example.pokedex.DTO.OwnedRequest;
 import com.example.pokedex.Entity.OwnedPokemon;
 import com.example.pokedex.Entity.Pokemon;
+import com.example.pokedex.Entity.PokemonReturned;
 import com.example.pokedex.Entity.UserEntity;
 import com.example.pokedex.Util.JWTUtil;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -70,18 +71,18 @@ public class AddOwnedService {
         }
     }
 
-    public ResponseEntity<?>getFromOwned(Authentication authentication){
+    public ResponseEntity<List<PokemonReturned>>getFromOwned(Authentication authentication){
        try {
            UserEntity owner = userDAO.findUserByEmail(authentication.getName());
-           List<Object> ownedList=ownedDAO.owning(owner.getId_user());
+           List<PokemonReturned> ownedList=ownedDAO.owning(owner.getId_user());
 
            if(ownedList.isEmpty()){
                return new ResponseEntity<>(ownedList, HttpStatus.NOT_FOUND);
            }
            return new ResponseEntity<>(ownedList, HttpStatus.OK);
        }catch (Exception e){
-           ArrayList<Pokemon> empty = new ArrayList<>();
-           return new ResponseEntity<>(empty, HttpStatus.INTERNAL_SERVER_ERROR);
+
+           return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
        }
     }
 }

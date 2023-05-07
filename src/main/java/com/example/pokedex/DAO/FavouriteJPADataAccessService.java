@@ -1,6 +1,7 @@
 package com.example.pokedex.DAO;
 
 import com.example.pokedex.Entity.FavoritePokemon;
+import com.example.pokedex.Entity.PokemonReturned;
 import com.example.pokedex.Repository.FavoritePokemonRepository;
 import org.springframework.stereotype.Repository;
 
@@ -26,7 +27,7 @@ public class FavouriteJPADataAccessService implements FavouriteDAO{
     }
 
     @Override
-    public List<Object> favorite(long userId) {
+    public List<PokemonReturned> favorite(long userId) {
         return favoritePokemonRepository.findByFavorite(userId);
     }
 }

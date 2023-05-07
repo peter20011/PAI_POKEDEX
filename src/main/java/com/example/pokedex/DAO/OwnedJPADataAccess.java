@@ -1,6 +1,7 @@
 package com.example.pokedex.DAO;
 
 import com.example.pokedex.Entity.OwnedPokemon;
+import com.example.pokedex.Entity.PokemonReturned;
 import com.example.pokedex.Repository.OwnedPokemonRepository;
 import org.springframework.stereotype.Repository;
 
@@ -26,7 +27,7 @@ public class OwnedJPADataAccess  implements OwnedDAO{
     }
 
     @Override
-    public List<Object> owning(long userId) {
+    public List<PokemonReturned> owning(long userId) {
         return ownedPokemonRepository.findOwnedPokemonByUserId(userId);
     }
 }

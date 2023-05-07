@@ -7,6 +7,7 @@ import com.example.pokedex.DAO.UserDAO;
 import com.example.pokedex.DTO.FavouriteRequest;
 import com.example.pokedex.Entity.FavoritePokemon;
 import com.example.pokedex.Entity.Pokemon;
+import com.example.pokedex.Entity.PokemonReturned;
 import com.example.pokedex.Entity.UserEntity;
 import com.example.pokedex.Util.JWTUtil;
 import org.slf4j.Logger;
@@ -71,20 +72,19 @@ public class AddFavouriteService {
         }
     }
 
-    public ResponseEntity<?>getFromFavorites(Authentication authentication){
+    public ResponseEntity<List<PokemonReturned>>getFromFavorites(Authentication authentication){
         try {
             UserEntity owner = userDAO.findUserByEmail(authentication.getName());
             logger.info("User: " + owner.getEmail() + " is getting his favourites");
             logger.info("User id: " + owner.getId_user());
-            List<Object> ownedList=favouriteDAO.favorite(owner.getId_user());
+            List<PokemonReturned> ownedList=favouriteDAO.favorite(owner.getId_user());
             if(ownedList.isEmpty()){
                 return new ResponseEntity<>(ownedList, HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(ownedList, HttpStatus.OK);
         }catch (Exception e){
             logger.error(e.getMessage());
-            ArrayList<Pokemon> empty = new ArrayList<>();
-            return new ResponseEntity<>(empty, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>( HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
