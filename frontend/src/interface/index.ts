@@ -98,6 +98,11 @@ export interface IPokemonTypes {
   };
 }
 
+export interface PokemonTypes {
+  slot: number
+  type: IPokemonFetch
+}
+
 export interface IPokemon {
   abilities: IPokemonAbilities[];
   base_experience: number;
@@ -300,3 +305,47 @@ export interface ISignIn{
   email: string;
   password: string;
 }
+
+interface PokemonAbilities {
+  ability: IPokemonFetch
+  is_hidden: boolean
+}
+export interface PokemonTypes {
+  slot: number
+  type: IPokemonFetch
+}
+
+interface PokemonStats {
+  base_stat: number
+  effort: number
+  stat: IPokemonFetch
+}
+
+
+export interface PokemonDataInterface {
+  abilities: PokemonAbilities[]
+  base_experience: number
+  height: number
+  id: number
+  name: string
+  species: IPokemonFetch
+  types: string[]
+  weight: number
+  stats: PokemonStats[]
+  sprite: string
+}
+
+interface FlavorTextEntry {
+  flavor_text: string
+  language: { name: string; url: string }
+}
+
+interface Genera {
+  genus: string
+  language: {
+    name: string
+    url: string
+  }
+}
+
+

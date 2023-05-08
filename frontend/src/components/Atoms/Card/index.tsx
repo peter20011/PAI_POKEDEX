@@ -1,13 +1,13 @@
 import { FC } from "react";
-
 import { FlexBox } from "../Flexbox";
 import * as Atom from "./atoms";
 
 import type { ICardProps } from "./types";
 
 const Card: FC<ICardProps> = ({ id, image, name, type }) => {
+  
   return ( 
-   <a href="/description">      
+   <a href={`/description/${name}`}>      
     <Atom.Container 
       gap="xs"
       align="center"
