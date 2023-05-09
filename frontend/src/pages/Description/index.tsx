@@ -4,71 +4,13 @@ import {
   Header,
   PokedexView,
   Button,
-  Card
+  CommentSection
 } from "../../components";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { FC } from "react";
-
-
-interface PokemonData {
-  id: number;
-  name: string;
-  types: {
-    slot: number;
-    type: {
-      name: string;
-      url: string;
-    };
-  }[];
-  height: number;
-  weight: number;
-  abilities: {
-    ability: {
-      name: string;
-      url: string;
-    };
-    is_hidden: boolean;
-    slot: number;
-  }[];
-  base_experience: number;
-  species: {
-    name: string;
-    url: string;
-    genera: {
-      genus: string;
-      language: {
-        name: string;
-        url: string;
-      };
-    }[];
-    flavor_text_entries: {
-      flavor_text: string;
-      language: {
-        name: string;
-        url: string;
-      };
-      version: {
-        name: string;
-        url: string;
-      };
-    }[];
-  };
-  forms: {
-    name: string;
-    url: string;
-  }[];
-  stats: {
-    base_stat: number;
-    effort: number;
-    stat: {
-      name: string;
-      url: string;
-    };
-  }[];
-} 
-
-
+import {PokemonData} from "./../../interface/index"
+import { PokemonText } from "../../components/Atoms/Card/atoms";
 
 const getStringIDfromID = (id: number) => {
   if (id < 10) {
@@ -100,7 +42,6 @@ export const getPokemonImage = async (id: number) => {
     }
   } catch {}
 
-
   return officialArtworkUrl;
 };
 
@@ -118,12 +59,15 @@ export const PokemonImage: FC<{ id: number; name: string }> = ({ id, name }) => 
   }, [id]);
 
   return isLoading ? (
-    <img src="placeholder.png" alt={`${name} image`} />
+    <Types.StyledImage src="placeholder.png" alt={`${name} image`} />
   ):(
-    <img src={imageUrl} alt={`${name} image`} />
+    <Types.StyledImage src={imageUrl} alt={`${name} image`} />
   );
 };
 
+const emptyFunctionADD = function() {
+  return undefined;
+}
 
 const Description = () => {
   const { name } = useParams<{ name: string }>();
@@ -165,25 +109,47 @@ const Description = () => {
   return (
     <Container>
       <Header />
-      <Types.H1> {pokemonName.toUpperCase()}</Types.H1>
-      <PokedexView align="center" justify="center" direction="column" gap="xxs">
-        <div>Types: {types.map((type: any) => type.type.name).join(", ")}</div>
-        <div>Height: {height / 10}m</div>
-        <div>Weight: {weight / 10}kg</div>
-        <div>Abilities: {abilities.map((ability: any) => ability.ability.name).join(", ")}</div>
-        <div>Base Experience: {base_experience}</div>
-        <div>Stats:</div>
-        <ul>
-          {stats.map((stat: any) => (
-            <li key={stat.stat.name}>
-              {stat.stat.name}: {stat.base_stat}
-        </li>
-        ))}
-        </ul>
-        <PokemonImage id={id} name={pokemonName} />
-        </PokedexView>
-        </Container>
-        );
+      <Types.H1> 
+      {types.map((type: any, index: number) => (
+        <PokemonText key={type.slot} type={type.type.name}>
+           {index === 0 ? pokemonName : ''}
+           {index==0 ?  ' #'+id: ''}
+        </PokemonText>
+      ))}
+    </Types.H1>
+      <Types.PokedexView>
+        <Types.PokemonImageContainer>
+          <PokemonImage id={id} name={pokemonName} />
+        </Types.PokemonImageContainer>
+        <Types.PokemonDetails>
+        <Types.TextDiv>
+          <div>TYPES: {types.map((type: any) => type.type.name).join(", ")}</div>
+          <div>HEIGHT: {height / 10}m</div>
+          <div>WEIGHT: {weight / 10}kg</div>
+          <div>ABILITIES: {abilities.map((ability: any) => ability.ability.name).join(", ")}</div>
+          <div>BASE EXPIERIENCE: {base_experience}</div>
+          <br/>
+          <div>STATS:</div>
+          <div>
+            {stats.map((stat: any) => (
+              <div key={stat.stat.name}>
+                {stat.stat.name.toUpperCase()}: {stat.base_stat}
+              </div>
+            ))}
+          </div>
+          </Types.TextDiv>  
+          <div>
+            <Button onClick={() => emptyFunctionADD()}>
+              Add to owned
+            </Button>
+            <Button onClick={() => emptyFunctionADD()}>
+              Add to favorite
+            </Button>
+          </div>
+        </Types.PokemonDetails>
+      </Types.PokedexView>
+      <CommentSection />
+    </Container>
+  );
 };
-
 export default Description;

@@ -13,6 +13,7 @@ import Loading from "./Atoms/Loading";
 
 import PokemonsSection from "./Molecules/PokemonsSection";
 import SinglePokemon from "./Molecules/SinglePokemon";
+import CommentSection from "./Atoms/Comments";
 
 export {
   Button,
@@ -25,4 +26,5 @@ export {
   PokedexView,
   PokemonsSection,
   SinglePokemon,
+  CommentSection
 };

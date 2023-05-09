@@ -348,4 +348,60 @@ interface Genera {
   }
 }
 
-
+ 
+export interface PokemonData {
+  id: number;
+  name: string;
+  types: {
+    slot: number;
+    type: {
+      name: string;
+      url: string;
+    };
+  }[];
+  height: number;
+  weight: number;
+  abilities: {
+    ability: {
+      name: string;
+      url: string;
+    };
+    is_hidden: boolean;
+    slot: number;
+  }[];
+  base_experience: number;
+  species: {
+    name: string;
+    url: string;
+    genera: {
+      genus: string;
+      language: {
+        name: string;
+        url: string;
+      };
+    }[];
+    flavor_text_entries: {
+      flavor_text: string;
+      language: {
+        name: string;
+        url: string;
+      };
+      version: {
+        name: string;
+        url: string;
+      };
+    }[];
+  };
+  forms: {
+    name: string;
+    url: string;
+  }[];
+  stats: {
+    base_stat: number;
+    effort: number;
+    stat: {
+      name: string;
+      url: string;
+    };
+  }[];
+} 
