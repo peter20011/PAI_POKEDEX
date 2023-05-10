@@ -14,6 +14,7 @@ import Loading from "./Atoms/Loading";
 import PokemonsSection from "./Molecules/PokemonsSection";
 import SinglePokemon from "./Molecules/SinglePokemon";
 import CommentSection from "./Atoms/Comments";
+import PrivateRoutes from "./Atoms/Route/PrivateRoutes";
 
 export {
   Button,
@@ -26,5 +27,6 @@ export {
   PokedexView,
   PokemonsSection,
   SinglePokemon,
-  CommentSection
+  CommentSection,
+  PrivateRoutes
 };

@@ -3,7 +3,6 @@ import { Container, FlexBox, PokedexView,Header } from "../../components";
 const Error404 = () => {
   return (
     <Container>
-      <Header/>
       <FlexBox align="center" justify="center" direction="row">
         <img
           alt="Pokemon gengar gif"

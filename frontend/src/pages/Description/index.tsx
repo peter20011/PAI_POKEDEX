@@ -112,8 +112,7 @@ const Description = () => {
       <Types.H1> 
       {types.map((type: any, index: number) => (
         <PokemonText key={type.slot} type={type.type.name}>
-           {index === 0 ? pokemonName : ''}
-           {index==0 ?  ' #'+id: ''}
+           {index === 0 ? pokemonName: ''}
         </PokemonText>
       ))}
     </Types.H1>
