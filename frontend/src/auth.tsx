@@ -1,7 +1,7 @@
 import { NavigateFunction } from "react-router-dom";
 
 
-// const fetchUserUrl = `${import.meta.env.REACT_APP_BACKEND_URL}/app/Home`;
+const fetchUserUrl = `http://localhost:8080/app/getUser`;
 const loginUrl=`http://localhost:8080/auth/login`;
 const logoutUrl=`http://localhost:8080/auth/logout`;
 interface UserState {
@@ -10,12 +10,12 @@ interface UserState {
     role: Role;
 }
 
-enum Role {
+export enum Role {
     ADMIN,
     USER
 }
 
-interface User {
+export interface User {
     username: string;
     role: Role;
 }
@@ -109,14 +109,6 @@ export const isLoggedIn = (): boolean => {
     return true;
 };
 
-export const isAdmin = (): boolean => {
-    if (!isLoggedIn()) return false;
-
-    const userState = getUserstate();
-    if (userState === null) return false;
-
-    return userState.role === Role.ADMIN;
-};
 
 export const login = async (email: string, password: string, navigate: NavigateFunction): Promise<string | void> => {
 
@@ -149,32 +141,24 @@ export const login = async (email: string, password: string, navigate: NavigateF
     }
 };
 
-export const validateUser = (user: User): user is User => {
-    if (typeof user !== 'object') return false;
-    if (typeof user.username !== 'string') return false;
-    if (typeof user.role !== 'string') return false;
 
-    switch (user.role) {
-        case Role[Role['USER']] as unknown as Role: user.role = Role.USER; break;
-        case Role[Role['ADMIN']] as unknown as Role: user.role = Role.ADMIN; break;
-        default: return false;
-    }
-
-
-    return true;
-};
 
 export const fetchUser = async (): Promise<User | null> => {
     const requestOptions = {
         method: 'GET',
+        headers: {
+            'Authorization': "Bearer " + sessionStorage.getItem("userToken"),
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Credentials': 'true'
+        }
     };
 
     try {
-        const resp = await fetch(/*fetchUserUrl*/ "/app/Home", requestOptions);
+        const resp = await fetch(fetchUserUrl, requestOptions);
         if (resp.status !== 200) return null;
 
         const user = await resp.json();
-        if (!validateUser(user)) return null;
 
         return user;
     } catch (err) { }

@@ -7,12 +7,21 @@ import * as Atom from "./atoms";
 import { Container } from "../Container";
 import { MdHome } from "react-icons/md";
 import { FlexBox } from "../Flexbox";
-import { useState } from "react";
-
-import { logout as apiLogout } from "../../../auth";
+import { useEffect, useState } from "react";
+import { logout as apiLogout,User, fetchUser } from "../../../auth";
 
 const Header = () => {
   const [active, setactive]= useState(false);
+  const [user,setUser]=useState<User | null>(null);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const userData = await fetchUser(); // Call the fetchUser function to get the user data
+      setUser(userData); // Set the user state to the fetched data
+    };
+    fetchUserData();
+  }, []);
+
   return (
     <Container>
       <Atom.HeaderContainer
@@ -32,7 +41,7 @@ const Header = () => {
           <Atom.Menu>
                 <Atom.HeaderItem onClick={() =>setactive(!active)}>
                   <BsPerson size="20"/>  
-                    Peterson
+                    {user?.username ?? 'Loading...'}
                   <Atom.Menu_items style={{
                     display: active ? "initial": "none"
                   }} >

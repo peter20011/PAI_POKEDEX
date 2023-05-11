@@ -1,26 +1,30 @@
-import { FC, useState } from "react";
+import React, { FC, useState, useEffect } from "react";
 import { FiMessageSquare } from "react-icons/fi";
 import { Button } from "../Button/atoms";
 import * as Types from "./types";
-type Comment = {
+import { User, fetchUser, Role } from "../../../auth";
+
+
+
+interface Comment {
   id: number;
-  user: string;
   text: string;
   date: Date;
-};
+  user?: User | null;
+}
 
 interface CommentProps extends Comment {
   onDelete?: () => void;
   isAdmin?: boolean;
 }
 
-const Comment: FC<CommentProps> = ({ id, user, text, date, onDelete }) => {
+const Comment: FC<CommentProps> = ({ id, text, date, onDelete, isAdmin, user }) => {
   return (
     <Types.UserComment>
       <p>{text}</p>
       <small>
-        {user} - {date.toLocaleDateString()}
-        {onDelete && <Button onClick={onDelete}>Delete</Button>}
+        {user ? user.username : "Anonymous"} - {date.toLocaleDateString()}
+        {isAdmin && onDelete && <Button onClick={onDelete}>Delete</Button>} {/* wyświetlenie przycisku usuwania tylko dla admina */}
       </small>
     </Types.UserComment>
   );
@@ -30,10 +34,20 @@ const CommentSection: FC = () => {
   const [comments, setComments] = useState<Comment[]>([]);
   const [newComment, setNewComment] = useState("");
   const [showComments, setShowComments] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    const getUser = async () => {
+      const fetchedUser = await fetchUser();
+      setUser(fetchedUser);
+    };
+
+    getUser();
+  }, []);
 
   const handleAddComment = () => {
     const newId = comments.length + 1;
-    const newUser = "User";
+    const newUser = user || null;
     const newDate = new Date();
     const newCommentObj = { id: newId, user: newUser, text: newComment, date: newDate };
     setComments([...comments, newCommentObj]);
@@ -53,7 +67,12 @@ const CommentSection: FC = () => {
       {showComments && (
         <>
           {comments.map(comment => (
-            <Comment key={comment.id} {...comment} onDelete={() => handleDeleteComment(comment.id)} />
+            <Comment
+              key={comment.id}
+              {...comment}
+              onDelete={() => handleDeleteComment(comment.id)}
+              isAdmin={user?.role.toString() == "ADMIN"} // porównanie roli zalogowanego użytkownika z rolą admina
+            />
           ))}
           <div>
             <textarea value={newComment} onChange={(e) => setNewComment(e.target.value)} />

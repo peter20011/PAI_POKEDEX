@@ -7,9 +7,6 @@ import {Header } from "../../components";
 import { useNavigate } from "react-router-dom";
 import * as Atom from "./../../components/Atoms/Input/atoms"
 
-const emptyFunctionADD = function() {
-  return undefined;
-}
 
 const changepasswordUrl=`http://localhost:8080/app/changePassword`
 
@@ -63,7 +60,7 @@ const ChangePassword = () => {
           alert(response);
         } 
 
-        navigate('/login');
+        navigate('/app/changepassword');
         alert('Password successfuly changed');
       }catch(err){
         console.log('dupa');
