@@ -1,9 +1,9 @@
 import { NavigateFunction } from "react-router-dom";
 
-const loginUrl = `${process.env.REACT_APP_BACKEND_URL}/auth/login`;
-const logoutUrl = `${process.env.REACT_APP_BACKEND_URL}/logout`;
-const fetchUserUrl = `${process.env.REACT_APP_BACKEND_URL}/app/Home`;
 
+// const fetchUserUrl = `${import.meta.env.REACT_APP_BACKEND_URL}/app/Home`;
+const loginUrl=`http://localhost:8080/auth/login`;
+const logoutUrl=`http://localhost:8080/auth/logout`;
 interface UserState {
     username: string;
     sessionStart: Date;
@@ -28,6 +28,7 @@ export class InvalidSessionError extends Error {
 }
 
 export const removeSesionData = () => {
+    sessionStorage.removeItem('userToken');
     sessionStorage.removeItem('USERSTATE');
 };
 
@@ -45,7 +46,7 @@ export const logout = async () => {
         const response = await fetch(logoutUrl, requestOptions)
         if (response.ok) {
             removeSesionData();
-
+            
             document.location.href = '/login';
         }
     } catch (err) {
@@ -142,7 +143,10 @@ export const login = async (email: string, password: string, navigate: NavigateF
                 navigate("/app/Home");
             });
 
-    } catch (err) { }
+    } catch (err) {
+            alert('Wrong login details. Please try again.');
+        
+    }
 };
 
 export const validateUser = (user: User): user is User => {

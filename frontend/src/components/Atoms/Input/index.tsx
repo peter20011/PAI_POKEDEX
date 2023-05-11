@@ -7,7 +7,9 @@ import * as Atom from "./atoms";
 
 import type { IInput } from "./types";
 
-const Input: FC<IInput> = ({ label, ...rest }) => {
+
+
+const Input: FC<IInput> = ({ label, ...rest}) => {
   return (
     <FlexBox align="flex-start" justify="center" direction="column" gap="xxs">
       {label}

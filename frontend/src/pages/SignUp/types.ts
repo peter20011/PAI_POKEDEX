@@ -71,6 +71,10 @@ export const AnimationContainer = styled.div`
     }
 
   }
+
+  @media(max-width: 845px){
+    transform: scale(1.2);
+   }
 `;
 
 export const Header = styled.div`

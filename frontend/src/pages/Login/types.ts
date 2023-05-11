@@ -69,6 +69,10 @@ export const AnimationContainer = styled.div`
       margin-right: 50px;
     }
   }
+  @media(max-width: 845px){
+   margin: 0 auto;
+   transform: scale(1.15);
+  }
 `;
 
 export const Header = styled.div`
@@ -109,3 +113,4 @@ export const ImageLogin = styled.div`
     display:none;
   }
 `;
+

@@ -9,7 +9,7 @@ import { MdHome } from "react-icons/md";
 import { FlexBox } from "../Flexbox";
 import { useState } from "react";
 
-
+import { logout as apiLogout } from "../../../auth";
 
 const Header = () => {
   const [active, setactive]= useState(false);
@@ -39,7 +39,7 @@ const Header = () => {
                   <Atom.Menu_items_a href="/app/favorite">Favorite</Atom.Menu_items_a >
                   <Atom.Menu_items_a  href="/app/owned">Owned</Atom.Menu_items_a >
                   <Atom.Menu_items_a  href="/app/changepassword">Change password</Atom.Menu_items_a >
-                  <Atom.Menu_items_a  href="/login">Logout</Atom.Menu_items_a >
+                  <Atom.Menu_items_a  onClick={()=>apiLogout()}>Logout</Atom.Menu_items_a >
                   </Atom.Menu_items>
                   </Atom.HeaderItem>
                 </Atom.Menu>

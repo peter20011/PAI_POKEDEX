@@ -29,7 +29,7 @@ const ChangePassword = () => {
               </div>
             </Types.Header>
             <PokedexView align="center" justify="center" direction="column" gap="xxs"> 
-            <form >
+            
               <h1>Change Password</h1>
 
               <Input
@@ -52,7 +52,7 @@ const ChangePassword = () => {
               <em>Show password?</em>
             </label>
             <Button onClick={() => emptyFunctionADD}> Confirm </Button>
-            </form>
+            
             </PokedexView>
           </Types.AnimationContainer>
         </Types.Content>

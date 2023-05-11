@@ -7,13 +7,13 @@ const AppRouter = () => (
     <Route path="*" element={<Error404 />} />
     <Route path="/login" element={<Login />}/>
     <Route path="/signUP" element={<SignUP />}/>
-    {/* <Route element={<PrivateRoutes/>}> */}
+    <Route element={<PrivateRoutes/>}>
       <Route path="/app/Home" element={<Home />} />
       <Route path="/app/favorite" element={<Favorite />} />
       <Route path="/app/owned" element={<Owned/>}/>
       <Route path="/app/changepassword" element={<ChangePassword/>}/>
       <Route path="/description/:name" element={<Description />} />
-    {/* </Route> */}
+    </Route>
   </Routes>
 );
 

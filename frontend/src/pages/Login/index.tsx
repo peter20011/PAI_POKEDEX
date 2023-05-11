@@ -3,10 +3,10 @@ import PokeBallLogo from "../../assets/pokeball.svg";
 import * as Types from "./types";
 import { useState} from 'react';
 import {PokedexView} from "../../components/Atoms/PokedexView";
- 
-const emptyFunctionADD = function() {
-  return undefined;
-}
+import { useRef } from 'react';
+import { login as apiLogin } from '../../auth';
+import {useNavigate } from 'react-router-dom';
+import * as Atom from "./../../components/Atoms/Input/atoms"
 
 const Login = () => {
 
@@ -14,7 +14,23 @@ const Login = () => {
 
   const togglePassword = () => {
     setIsSHown((isShown) => !isShown);
-}
+  }
+
+  const email = useRef<HTMLInputElement>(null);
+  const password = useRef<HTMLInputElement>(null);
+
+    const navigate = useNavigate();
+
+    async function sendLoginRequest() {
+        if (!password.current?.value || !email.current?.value){
+            return;
+          }
+        else {
+            const resp = await apiLogin(email.current?.value, password.current?.value, navigate);
+            if (resp !== undefined) alert(`Error: ${resp}`);
+        }
+    }
+
 
   return (
     <Types.Container>
@@ -26,22 +42,22 @@ const Login = () => {
           </div>
         </Types.Header>
         <PokedexView align="center" justify="center" direction="column" gap="xxs"> 
-          <form>
+          
+          
             <h1>Login</h1>
-            <Input name="email" placeholder="E-mail"/>
-            <Input name="password" placeholder="password" type={isShown ? 'text' : 'password'} /> 
+            <Atom.Input ref={email} name="email" placeholder="E-mail"/>
+            <Atom.Input ref={password} name="password" placeholder="password" type={isShown ? 'text' : 'password'} /> 
             
             <label>
               <input type="checkbox" checked={isShown} onChange={togglePassword}/>
               <em>Show password?</em>
             </label>
-            <Button onClick={() => emptyFunctionADD }>
-              Sing In
-            </Button>
-            <em>
-              <a href="/SignUp" >Sign up</a>
-            </em>
-          </form>
+              <Button onClick={() => sendLoginRequest() }>
+                Sing In
+              </Button>
+              <em>
+                <a href="/SignUp" >Sign up</a>
+              </em>
           </PokedexView> 
       </Types.AnimationContainer>
       <Types.Divider />
