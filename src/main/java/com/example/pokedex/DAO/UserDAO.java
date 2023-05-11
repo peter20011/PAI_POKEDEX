@@ -1,5 +1,6 @@
 package com.example.pokedex.DAO;
 
+import com.example.pokedex.Entity.UserDataRequest;
 import com.example.pokedex.Entity.UserEntity;
 import org.apache.catalina.User;
 
@@ -15,5 +16,7 @@ public interface UserDAO {
     void save(UserEntity userEntity);
 
     void changePassword(String email, String password);
+
+    UserDataRequest getData(String email);
 
 }

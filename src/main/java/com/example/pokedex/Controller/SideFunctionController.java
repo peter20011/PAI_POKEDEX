@@ -4,10 +4,7 @@ package com.example.pokedex.Controller;
 import com.example.pokedex.DTO.*;
 import com.example.pokedex.Entity.Comment;
 import com.example.pokedex.Entity.Pokemon;
-import com.example.pokedex.Services.AddFavouriteService;
-import com.example.pokedex.Services.AddOwnedService;
-import com.example.pokedex.Services.ChangePasswordService;
-import com.example.pokedex.Services.CommentService;
+import com.example.pokedex.Services.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -25,14 +22,17 @@ public class SideFunctionController {
     private CommentService commentService;
     private AddOwnedService addOwnedService;
 
+    private UserServiceDetails userServiceDetails;
+
 
     public SideFunctionController(ChangePasswordService changePasswordService,
                                   AddFavouriteService addFavouriteService,AddOwnedService addOwnedService,
-                                  CommentService commentService) {
+                                  CommentService commentService, UserServiceDetails userServiceDetails){
         this.changePasswordService = changePasswordService;
         this.addFavouriteService = addFavouriteService;
         this.addOwnedService = addOwnedService;
         this.commentService = commentService;
+        this.userServiceDetails = userServiceDetails;
     }
 
     @PostMapping(value = "/addToFavourite",produces = MediaType.APPLICATION_JSON_VALUE)
@@ -73,5 +73,10 @@ public class SideFunctionController {
     @PostMapping(value = "/changePassword",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> changePassword(@RequestBody ChangePasswordRequest request){
         return changePasswordService.changePassword(request);
+    }
+
+    @GetMapping(value = "/getUser",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getUser(Authentication authentication){
+        return userServiceDetails.getUser(authentication);
     }
 }

@@ -1,6 +1,7 @@
 package com.example.pokedex.DAO;
 
 
+import com.example.pokedex.Entity.UserDataRequest;
 import com.example.pokedex.Entity.UserEntity;
 import com.example.pokedex.Repository.UserEntityRepository;
 import org.springframework.stereotype.Repository;
@@ -39,6 +40,11 @@ public class UserJPADataAccessService  implements UserDAO{
     @Override
     public void changePassword(String email, String password) {
         userEntityRepository.changePassword(email, password);
+    }
+
+    @Override
+    public UserDataRequest getData(String email) {
+        return userEntityRepository.getUserData(email);
     }
 
 }

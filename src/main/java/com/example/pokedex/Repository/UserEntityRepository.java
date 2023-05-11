@@ -1,5 +1,6 @@
 package com.example.pokedex.Repository;
 
+import com.example.pokedex.Entity.UserDataRequest;
 import com.example.pokedex.Entity.UserEntity;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -21,4 +22,8 @@ public interface UserEntityRepository extends JpaRepository<UserEntity, Long>{
     @Modifying
     @Query(value = "UPDATE users SET password =:password WHERE email =:email", nativeQuery = true)
     void changePassword(@Param("email") String email, @Param("password") String password);
+
+    @Query(value="SELECT new com.example.pokedex.Entity.UserDataRequest(ue.username,ue.role) FROM UserEntity ue where ue" +
+            ".email=:email")
+    UserDataRequest getUserData(@Param("email") String email);
 }
