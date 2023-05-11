@@ -43,12 +43,12 @@ public class  Config {
 
 
 
-            Pokemon Bulbasaur= new Pokemon("Bulbasaur");
-            Pokemon Ivysaur= new Pokemon("Ivysaur");
-            Pokemon Venusaur= new Pokemon("Venusaur");
-            Pokemon Charmander= new Pokemon("Charmander");
-            Pokemon Charmeleon= new Pokemon("Charmeleon");
-            Pokemon Charizard= new Pokemon("Charizard");
+            Pokemon Bulbasaur= new Pokemon("bulbasaur");
+            Pokemon Ivysaur= new Pokemon("ivysaur");
+            Pokemon Venusaur= new Pokemon("venusaur");
+            Pokemon Charmander= new Pokemon("charmander");
+            Pokemon Charmeleon= new Pokemon("charmeleon");
+            Pokemon Charizard= new Pokemon("charizard");
 
 
 
