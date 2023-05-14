@@ -16,8 +16,8 @@ const Header = () => {
 
   useEffect(() => {
     const fetchUserData = async () => {
-      const userData = await fetchUser(); // Call the fetchUser function to get the user data
-      setUser(userData); // Set the user state to the fetched data
+      const userData = await fetchUser(); 
+      setUser(userData); 
     };
     fetchUserData();
   }, []);

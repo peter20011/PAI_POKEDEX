@@ -12,6 +12,8 @@ import { FC } from "react";
 import {PokemonData} from "./../../interface/index"
 import { PokemonText } from "../../components/Atoms/Card/atoms";
 
+const addFavoriteUrl=`http://localhost:8080/app/addToFavourite`
+const addOwnedUrl=`http://localhost:8080/app/addToOwned`
 const getStringIDfromID = (id: number) => {
   if (id < 10) {
     return `00${id}`;
@@ -69,11 +71,90 @@ const emptyFunctionADD = function() {
   return undefined;
 }
 
+
+
+
 const Description = () => {
   const { name } = useParams<{ name: string }>();
   const [pokemonData, setPokemonData] = useState<PokemonData | null>(null);
-  const [versionDescription, setVersionDescription] = useState("");
+  
 
+  async function addFavoriteAPI() {
+
+    const body = {
+      token: sessionStorage.getItem('userToken'),
+      pokemonName: name
+    };
+
+      const requestOptions = {
+        method: 'POST',
+        headers: {
+            'Authorization': "Bearer " + sessionStorage.getItem("userToken"),
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Credentials': 'true'
+        },
+        body: JSON.stringify(body),
+
+    };
+
+      try{
+        const response= await fetch(addFavoriteUrl,requestOptions);
+        if(!response.ok){
+          throw response;
+          alert(response);
+        } 
+
+      }catch(err){
+        console.log('dupa');
+        if (err instanceof Response) {
+          const message = await err.text();
+          if (err.headers.get('Content-Type')?.includes('text/plain')) {
+              alert(`Error: ${message}`);
+          } else {
+              alert('Pokemon already is owned');
+          }
+      }
+  }
+};
+
+async function addOwnedAPI() {
+
+  const body = {
+    token: sessionStorage.getItem('userToken'),
+    pokemonName: name
+  };
+
+    const requestOptions = {
+      method: 'POST',
+      headers: {
+          'Authorization': "Bearer " + sessionStorage.getItem("userToken"),
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Credentials': 'true'
+      },
+      body: JSON.stringify(body),
+
+  };
+
+    try{
+      const response= await fetch(addOwnedUrl,requestOptions);
+      if(!response.ok){
+        throw response;
+        alert(response);
+      } 
+
+    }catch(err){
+      if (err instanceof Response) {
+        const message = await err.text();
+        if (err.headers.get('Content-Type')?.includes('text/plain')) {
+            alert(`Error: ${message}`);
+        } else {
+            alert('Pokemon already is owned');
+        }
+    }
+}
+};
 
   useEffect(() => {
     const fetchData = async () => {
@@ -138,10 +219,10 @@ const Description = () => {
           </div>
           </Types.TextDiv>  
           <div>
-            <Button onClick={() => emptyFunctionADD()}>
+            <Button onClick={() => addOwnedAPI()}>
               Add to owned
             </Button>
-            <Button onClick={() => emptyFunctionADD()}>
+            <Button onClick={() => addFavoriteAPI()}>
               Add to favorite
             </Button>
           </div>
