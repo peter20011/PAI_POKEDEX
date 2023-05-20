@@ -31,28 +31,16 @@ services:
     ports:
       - "5432:5432"
 
-  frontend:
-    build:
-      context: .
-      dockerfile: ./docker/frontend/Dockerfile
-    depends_on:
-      - backend
-    environment:
-      - REACT_APP_BACKEND_URL=/api/v1
-    volumes:
-      - ./frontend/src:/app/src
-      - ./frontend/public:/app/public
-    
-
-  # nginx:
-  #   image: nginx:stable-alpine
+  # frontend:
+  #   build:
+  #     context: ./Frontend
+  #     dockerfile: dockerfile
   #   depends_on:
   #     - backend
-  #     - frontend
-  #   ports:
-  #     - "${FRONTEND_PORT}:80"
   #   environment:
-  #     - DEV_CLIENT_IP=${DEV_CLIENT_IP}
-  #     - NGINX_ENVSUBST_OUTPUT_DIR=/etc/nginx
+  #     - REACT_APP_BACKEND_URL=/api/v1
   #   volumes:
-  #     - ./docker/nginx/nginx.conf:/etc/nginx/templates/nginx.conf.template:ro
+  #     - ./Frontend/src:/app/src
+  #     - ./Frontend/public:/app/public
+    
+
