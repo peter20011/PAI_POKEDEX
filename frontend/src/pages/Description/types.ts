@@ -1,26 +1,26 @@
 import styled from 'styled-components';
 
 export const H1 = styled.h1`
-font-family: Montserrat, sans-serif;
-display: flex; 
-justify-content: center; 
-align-items: center;
-margin: 0 auto;
-@media screen and (min-width: 768px) {
-  // margin: 0 5%;
-}
+  font-family: Montserrat, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+
+  @media screen and (min-width: 768px) {
+    // margin: 0 5%;
+  }
 `;
 
-export const TextDiv=styled.div`
+export const TextDiv = styled.div`
   font-family: Montserrat, sans-serif;
-`
+`;
 
 export const PokemonImageContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 16px;
-  
 
   @media screen and (min-width: 768px) {
     margin-right: 16px;
@@ -60,5 +60,15 @@ export const StyledImage = styled.img`
     width: 100%;
     height: auto;
   }
+`;
 
+
+
+export const ButtonRow = styled.div`
+  display: flex;
+  margin-top: 8px;
+
+  &:first-child {
+    margin-top: 0;
+  }
 `;

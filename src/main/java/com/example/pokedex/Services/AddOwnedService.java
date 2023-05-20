@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Collections;
 
 @Service
 public class AddOwnedService {
@@ -79,10 +80,40 @@ public class AddOwnedService {
            if(ownedList.isEmpty()){
                return new ResponseEntity<>(ownedList, HttpStatus.NOT_FOUND);
            }
+           Collections.reverse(ownedList);
            return new ResponseEntity<>(ownedList, HttpStatus.OK);
        }catch (Exception e){
 
            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
        }
     }
+
+    public ResponseEntity<?> deleteFromOwned(OwnedRequest request){
+        try{
+            String email = jwtUtil.getSubject(request.token());
+            UserEntity userEntity = userDAO.findUserByEmail(email);
+            if(userEntity == null){
+                return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
+            }
+
+            if(pokemonDAO.ifExists(request.pokemonName())){
+                Pokemon pokemon = pokemonDAO.findPokemonByName(request.pokemonName());
+                if(pokemon == null){
+                    return new ResponseEntity<>("Pokemon not found", HttpStatus.NOT_FOUND);
+                }
+                if(!ownedDAO.ifExists(pokemon.getId_pokemon(), userEntity.getId_user())){
+                    return new ResponseEntity<>("Pokemon is not owned", HttpStatus.BAD_REQUEST);
+                }
+                OwnedPokemon ownedPokemon = ownedDAO.findOwnedPokemonByPokemonIdAndUserId(pokemon.getId_pokemon(), userEntity.getId_user());
+                ownedDAO.deleteOwned(ownedPokemon);
+                return new ResponseEntity<>("Pokemon deleted from owned", HttpStatus.OK);
+
+            }
+
+            return new ResponseEntity<>("Pokemon not found", HttpStatus.NOT_FOUND);
+        }catch (Exception e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }

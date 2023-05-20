@@ -30,4 +30,16 @@ public class OwnedJPADataAccess  implements OwnedDAO{
     public List<PokemonReturned> owning(long userId) {
         return ownedPokemonRepository.findOwnedPokemonByUserId(userId);
     }
+
+    @Override
+    public OwnedPokemon findOwnedPokemonByPokemonIdAndUserId(long pokemonId, long userId) {
+        return ownedPokemonRepository.findOwnedPokemonByPokemonIdAndUserId(pokemonId, userId);
+    }
+
+    @Override
+    public void deleteOwned(OwnedPokemon ownedPokemon) {
+        ownedPokemonRepository.delete(ownedPokemon);
+    }
+
+
 }

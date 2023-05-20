@@ -7,6 +7,14 @@ export const CommentSectionContainer = styled.div`
     box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
     word-wrap: break-word;
     justift-content:center;
+    max-height:300px;
+    overflow-y:scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    
+    .CommentSectionContainer::-webkit-scrollbar {
+        display: none;
+    }
     h2 {
         text-align: center;
         font-size: 28px;

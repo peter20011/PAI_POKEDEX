@@ -30,4 +30,13 @@ public class FavouriteJPADataAccessService implements FavouriteDAO{
     public List<PokemonReturned> favorite(long userId) {
         return favoritePokemonRepository.findByFavorite(userId);
     }
+
+    @Override
+    public FavoritePokemon findFavoritePokemonByPokemonIdAndUserId(long pokemonId, long userId) {
+        return favoritePokemonRepository.findFavoritePokemonByPokemonIdAndUserId(pokemonId, userId);
+    }
+    @Override
+    public void deleteFavourite(FavoritePokemon favoritePokemon) {
+        favoritePokemonRepository.delete(favoritePokemon);
+    }
 }

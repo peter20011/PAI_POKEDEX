@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Collections;
 @Service
 public class AddFavouriteService {
     private final UserDAO userDAO;
@@ -81,10 +81,38 @@ public class AddFavouriteService {
             if(ownedList.isEmpty()){
                 return new ResponseEntity<>(ownedList, HttpStatus.NOT_FOUND);
             }
+            Collections.reverse(ownedList);
             return new ResponseEntity<>(ownedList, HttpStatus.OK);
         }catch (Exception e){
             logger.error(e.getMessage());
             return new ResponseEntity<>( HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public ResponseEntity<?> deleteFromFavourite(FavouriteRequest request){
+        try{
+            String email = jwtUtil.getSubject(request.token());
+            UserEntity userEntity = userDAO.findUserByEmail(email);
+            if(userEntity == null){
+                return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
+            }
+
+            if(pokemonDAO.ifExists(request.pokemonName())){
+                Pokemon pokemon = pokemonDAO.findPokemonByName(request.pokemonName());
+                if(pokemon == null){
+                    return new ResponseEntity<>("Pokemon not found", HttpStatus.NOT_FOUND);
+                }
+                if(!favouriteDAO.ifExists(pokemon.getId_pokemon(), userEntity.getId_user())){
+                    return new ResponseEntity<>("Pokemon not in favourites", HttpStatus.BAD_REQUEST);
+                }
+                FavoritePokemon favoritePokemon = favouriteDAO.findFavoritePokemonByPokemonIdAndUserId(pokemon.getId_pokemon(), userEntity.getId_user());
+                favouriteDAO.deleteFavourite(favoritePokemon);
+                return new ResponseEntity<>("Pokemon deleted from favourites", HttpStatus.OK);
+
+            }
+            return new ResponseEntity<>("Pokemon not found", HttpStatus.NOT_FOUND);
+        }catch (Exception e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

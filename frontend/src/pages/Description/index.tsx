@@ -14,6 +14,8 @@ import { PokemonText } from "../../components/Atoms/Card/atoms";
 
 const addFavoriteUrl=`http://localhost:8080/app/addToFavourite`
 const addOwnedUrl=`http://localhost:8080/app/addToOwned`
+const delOwnedUrl=`http://localhost:8080/app/deleteFromOwned`
+const delFavoriteUrl=`http://localhost:8080/app/deleteFromFavourite`
 const getStringIDfromID = (id: number) => {
   if (id < 10) {
     return `00${id}`;
@@ -67,11 +69,6 @@ export const PokemonImage: FC<{ id: number; name: string }> = ({ id, name }) => 
   );
 };
 
-const emptyFunctionADD = function() {
-  return undefined;
-}
-
-
 
 
 const Description = () => {
@@ -112,7 +109,7 @@ const Description = () => {
           if (err.headers.get('Content-Type')?.includes('text/plain')) {
               alert(`Error: ${message}`);
           } else {
-              alert('Pokemon already is owned');
+              alert('Pokemon already is in favorite');
           }
       }
   }
@@ -151,6 +148,84 @@ async function addOwnedAPI() {
             alert(`Error: ${message}`);
         } else {
             alert('Pokemon already is owned');
+        }
+    }
+}
+};
+
+async function delFavoriteAPI() {
+
+  const body = {
+    token: sessionStorage.getItem('userToken'),
+    pokemonName: name
+  };
+
+    const requestOptions = {
+      method: 'POST',
+      headers: {
+          'Authorization': "Bearer " + sessionStorage.getItem("userToken"),
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Credentials': 'true'
+      },
+      body: JSON.stringify(body),
+
+  };
+
+    try{
+      const response= await fetch(delFavoriteUrl,requestOptions);
+      if(!response.ok){
+        throw response;
+        alert(response);
+      } 
+
+    }catch(err){
+      console.log('dupa');
+      if (err instanceof Response) {
+        const message = await err.text();
+        if (err.headers.get('Content-Type')?.includes('text/plain')) {
+            alert(`Error: ${message}`);
+        } else {
+            alert('Pokemon already deleted from favorites');
+        }
+    }
+}
+};
+
+async function delOwnAPI() {
+
+  const body = {
+    token: sessionStorage.getItem('userToken'),
+    pokemonName: name
+  };
+
+    const requestOptions = {
+      method: 'POST',
+      headers: {
+          'Authorization': "Bearer " + sessionStorage.getItem("userToken"),
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Credentials': 'true'
+      },
+      body: JSON.stringify(body),
+
+  };
+
+    try{
+      const response= await fetch(delFavoriteUrl,requestOptions);
+      if(!response.ok){
+        throw response;
+        alert(response);
+      } 
+
+    }catch(err){
+      console.log('dupa');
+      if (err instanceof Response) {
+        const message = await err.text();
+        if (err.headers.get('Content-Type')?.includes('text/plain')) {
+            alert(`Error: ${message}`);
+        } else {
+            alert('Pokemon already deleted from owned');
         }
     }
 }
@@ -217,14 +292,24 @@ async function addOwnedAPI() {
               </div>
             ))}
           </div>
-          </Types.TextDiv>  
-          <div>
+        </Types.TextDiv>  
+        <div>
+            <div>
             <Button onClick={() => addOwnedAPI()}>
               Add to owned
             </Button>
             <Button onClick={() => addFavoriteAPI()}>
               Add to favorite
             </Button>
+            </div>
+            <div>
+            <Button onClick={()=>delOwnAPI()}>
+              Delete from owned
+            </Button>
+            <Button onClick={()=>delFavoriteAPI()}>
+              Delete from favorite
+            </Button>
+            </div>
           </div>
         </Types.PokemonDetails>
       </Types.PokedexView>

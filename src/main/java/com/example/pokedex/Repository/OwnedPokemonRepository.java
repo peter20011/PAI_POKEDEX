@@ -3,7 +3,9 @@ package com.example.pokedex.Repository;
 import com.example.pokedex.Entity.OwnedPokemon;
 import com.example.pokedex.Entity.Pokemon;
 import com.example.pokedex.Entity.PokemonReturned;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -22,4 +24,6 @@ public interface OwnedPokemonRepository extends JpaRepository<OwnedPokemon, Long
             " INNER JOIN UserEntity u on op.user.id_user = u.id_user WHERE u.id_user = :userId")
     List<PokemonReturned> findOwnedPokemonByUserId(@Param("userId") long userId);
 
+    @Query(value = "select * from owned_pokemon where pokemon_id_pokemon = :pokemonId and user_id_user = :userId", nativeQuery = true)
+    OwnedPokemon findOwnedPokemonByPokemonIdAndUserId(@Param("pokemonId") long pokemonId, @Param("userId") long userId);
 }

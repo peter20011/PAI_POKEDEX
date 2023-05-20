@@ -45,9 +45,19 @@ public class SideFunctionController {
         return addFavouriteService.getFromFavorites(authentication);
     }
 
+    @PostMapping(value = "/deleteFromFavourite",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> deleteFromFavourite(@RequestBody FavouriteRequest request){
+        return addFavouriteService.deleteFromFavourite(request);
+    }
+
     @PostMapping(value = "/addToOwned",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> addToOwned(@RequestBody OwnedRequest request){
         return addOwnedService.addToOwned(request);
+    }
+
+    @PostMapping(value = "/deleteFromOwned",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> deleteFromOwned(@RequestBody OwnedRequest request){
+        return addOwnedService.deleteFromOwned(request);
     }
 
     @GetMapping(value = "/getFromOwned",produces = MediaType.APPLICATION_JSON_VALUE)

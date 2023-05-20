@@ -12,4 +12,9 @@ public interface FavouriteDAO {
 
     boolean ifExists(long pokemonId, long userId);
     List<PokemonReturned> favorite(long userId);
+
+    FavoritePokemon findFavoritePokemonByPokemonIdAndUserId(long pokemonId, long userId);
+
+    void deleteFavourite(FavoritePokemon favoritePokemon);
+
 }

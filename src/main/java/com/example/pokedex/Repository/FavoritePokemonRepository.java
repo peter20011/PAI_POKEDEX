@@ -21,4 +21,7 @@ public interface FavoritePokemonRepository  extends JpaRepository<FavoritePokemo
             "inner join  FavoritePokemon fp on p.id_pokemon = fp.pokemon.id_pokemon " +
             "INNER JOIN UserEntity u on fp.user.id_user = u.id_user WHERE u.id_user = :userId")
     List<PokemonReturned> findByFavorite(@Param("userId") long userId);
+
+    @Query(value = "select * from favorite_pokemon where pokemon_id_pokemon = :pokemonId and user_id_user = :userId", nativeQuery = true)
+    FavoritePokemon findFavoritePokemonByPokemonIdAndUserId(@Param("pokemonId") long pokemonId, @Param("userId") long userId);
 }

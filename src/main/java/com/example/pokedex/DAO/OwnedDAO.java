@@ -13,4 +13,8 @@ public interface OwnedDAO {
     boolean ifExists(long pokemonId, long userId);
 
     List<PokemonReturned> owning(long userId);
+
+    OwnedPokemon findOwnedPokemonByPokemonIdAndUserId(long pokemonId, long userId);
+
+    void deleteOwned(OwnedPokemon ownedPokemon);
 }
