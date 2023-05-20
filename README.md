@@ -25,23 +25,23 @@ A web application where you can read some information about pokemons, also divid
 # SCREENSHOTS
 
 - Login
-  ![Imgur](https://imgur.com/W5uyPwZ)
+  ![](ss/login.JPG)
 
 - Homepage
-  ![Homepage](ss/homepage.jpg)
+  ![](ss/homepage.jpg)
 
 - Search
-  ![Search](ss/search.JPG)
+  ![](ss/search.JPG)
 
 - Comment Section
-  ![Comment Section](ss/comment_section.JPG)
+  ![](ss/comment_section.JPG)
 
 - Description Page
-  ![Description Page](ss/descriptionpage.jpg)
+  ![](ss/descriptionpage.jpg)
 
 - Owned/Favorites
-  ![Owned](ss/owned.jpg)
-  ![Favorites](ss/fav.jpg)
+  ![](ss/owned.jpg)
+  ![](ss/fav.jpg)
 
 - Example of responsive design
-  ![Mobile View](ss/mobileView.jpg)
+  ![](ss/mobileView.jpg)
