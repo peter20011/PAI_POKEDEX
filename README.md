@@ -32,27 +32,27 @@ A web application where you can read some information about pokemons, also divid
 # SCREENSHOTS
 
 - Login
-  ![](ss/login.JPG)
+  ![Image Description](ss/login.JPG)
 
 
 - Homepage
-  ![](ss/homepage.jpg)
+  ![Image Description](ss/homepage.jpg)
 
 
 - Search
-  ![](ss/search.JPG)
+  ![Image Description](ss/search.JPG)
 
 
 - Comment Section
-  ![](ss/comment_section.JPG)
+  ![Image Description](ss/comment_section.JPG)
 
 
 - Description Pagge
-- ![](ss/descriptionpage.jpg)
+- ![Image Description](ss/descriptionpage.jpg)
 
 - Owned/Favorites
-- ![](ss/owned.jpg)
-- ![](ss/fav.jpg)
+- ![Image Description](ss/owned.jpg)
+- ![Image Description](ss/fav.jpg)
 
 - Example of responsive design
-- ![](ss/mobileView.jpg)
+- ![Image Description](ss/mobileView.jpg)
