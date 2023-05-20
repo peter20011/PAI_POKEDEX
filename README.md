@@ -32,10 +32,7 @@ A web application where you can read some information about pokemons, also divid
 
 - Search
   ![](ss/search.JPG)
-
-- Comment Section
-  ![](ss/comment_section.JPG)
-
+ 
 - Description Page
   ![](ss/descriptionpage.jpg)
 
