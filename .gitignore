@@ -16,6 +16,7 @@ dist-ssr
 .vscode/*
 !.vscode/extensions.json
 .idea
+ss
 .DS_Store
 *.suo
 *.ntvs*
@@ -23,7 +24,7 @@ dist-ssr
 *.sln
 *.sw?
 /frontend/node_modules
-
+.env
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
