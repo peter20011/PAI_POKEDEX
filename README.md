@@ -43,5 +43,3 @@ A web application where you can read some information about pokemons, also divid
   ![](ss/owned.jpg)
   ![](ss/fav.jpg)
 
-- Example of responsive design
-  ![](ss/mobileView.jpg)
