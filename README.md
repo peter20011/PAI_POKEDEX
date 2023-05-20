@@ -13,6 +13,7 @@ A web application where you can read some information about pokemons, also divid
 - Java (Spring Boot / Hibernate)
 - HTML/CSS
 - PostgreSQL
+- -PokeAPI
 
 
 # Requirements
