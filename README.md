@@ -25,7 +25,7 @@ A web application where you can read some information about pokemons, also divid
 # SCREENSHOTS
 
 - Login
-  ![](https://imgur.com/a/MK0bG6D)
+  ![Imgur](https://imgur.com/W5uyPwZ)
 
 - Homepage
   ![Homepage](ss/homepage.jpg)
