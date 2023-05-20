@@ -31,7 +31,7 @@ A web application where you can read some information about pokemons, also divid
   ![](ss/homepage.jpg)
 
 - Search
-  ![](ss/search.JPG)
+  ![](ss/search.jpg)
  
 - Description Page
   ![](ss/descriptionpage.jpg)
